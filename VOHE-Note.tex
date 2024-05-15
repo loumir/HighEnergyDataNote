@@ -54,13 +54,29 @@ infrastructure that enable VO applications.
 
 % We should introduce the purpose of the note in distribution and access of event list data products. Science cases should be focused to highlight that.
 
-High Energy (HE) astronomy typically includes X-ray astronomy, gamma-ray astronomy, neutrino astronomy, studies of cosmic rays, and more recently gravitational wave astronomy. This domain is now sufficiently developed to provide high level data such as catalogs, images, including full-sky surveys for some missions, and sources properties in the shape of spectra and time series.
+High Energy (HE) astronomy typically includes X-ray astronomy, gamma-ray astronomy, neutrino astronomy, and studies of cosmic rays. This domain is now sufficiently developed to provide high level data such as catalogs, images, including full-sky surveys for some missions, and sources properties in the shape of spectra and time series.
 Such high level, HE observations have been included in the VO, via data access endpoints provided by observatories or by agencies and indexed in the VO Registry.
 %Some high-energy (HE) data is already available via the VO. Images, time series, and spectra may be described with Obscore and access.
 
-However, after browsing this data, users may want to download lower level data and reapply data reduction steps relevant to their Science objectives. A common scenario is to download HE "event" lists, i.e. lists of detected events on a HE detector, that are expected to be detection of particles (e.g. a HE photon), and the corresponding calibration files, including instrument response functions. The findability and accessibility of these data via the VO is the focus of this note.
+However, after browsing this data, users may want to download lower level data and reapply data reduction steps relevant to their Science objectives. A common scenario is to download HE "event" lists, i.e. lists of detected events on a HE detector, that are expected to be detection of particles (e.g. a HE photon), and the corresponding calibration files, including Instrument Response Functions (IRFs). The findability and accessibility of these data via the VO is the focus of this note.
 
 We first report typical use cases for data access and analysis of data from current HE observatories. From those use cases, we note that some existing IVOA Recommendations are of interest to the domain. They should be further explored by HE observatories. We then discuss how standards could evolve to better integrate specific aspects of HE data, and if new standards should be developed.
+
+\subsection{Objectives of the document}
+
+The main objective of the document is to analyse how HE data can be better integrated to the VO.
+
+We  first identify and expose the specificities of HE data from several HE observatories. Then we intend to illustrate how HE data is or can be handled using current IVOA standards. Finally, we explore several topics that could lead to HE specific recommandations.
+
+A related objective is to provide a context and a list of topics to be further discussed within the IVOA by a dedicated HE Interest Group.
+
+
+\subsection{Scope of the document}
+
+This document mainly focuses on HE data discovery through the VO, with the identification of common use cases in the HE Astrophysics domain, which provides an insight of the specific metadata to be expose through the VO for HE data.
+
+To some extend, all current existing IVOA recommandation could be discussed in this document in the HE context.
+
 
 
 % \subsection{Role within the VO Architecture}
@@ -106,11 +122,11 @@ A focus of CTAO is to distribute in this context their Data Level 3 (DL3) datase
 \subsubsection{H.E.S.S}
 \label{sec:hess}
 
-H.E.S.S. is a system of Imaging Atmospheric Cherenkov Telescopes located in Namibia that investigates cosmic gamma rays in the energy range from 10s of GeV to 10s of TeV. It is constituted of four telescopes officially inaugurated in 2004, and a much larger fifth telescope operational since 2012, extending the energy coverage towards lower energies and further improving sensitivity.
+H.E.S.S. is a system of Imaging Atmospheric Cherenkov Telescopes located in Namibia that investigates cosmic gamma rays in the energy range from 10s of GeV to 100s of TeV. It is constituted of four telescopes officially inaugurated in 2004, and a much larger fifth telescope operational since 2012, extending the energy coverage towards lower energies and further improving sensitivity.
 
 The H.E.S.S. collaboration operates the telescopes as a private experiment and published mainly high level data, i.e. images, time series and spectra in scientific publications after dedicated analyses.
 
-In September 2018, the H.E.S.S. Collaboration has, for the first time and unique time, released a small subset of its archival data in Flexible Image Transport System (FITS) format, an open file format widely used in astronomy. The release consists of event-lists and instrument response functions for observations of various well-known gamma-ray sources
+In September 2018, the H.E.S.S. Collaboration has, for the first time and unique time, released a small subset of its archival data in Flexible Image Transport System (FITS) format, an open file format widely used in astronomy. The release consists of Cherenkov event-lists and IRFs for observations of various well-known gamma-ray sources
 \citep{hess-zenodo.1421098}.
 
 This test data collection has been registered in the VO via a TAP service hosted at the Observatoire de Paris, with a tentative ObsCore description of each dataset. We hope that in the future, the H.E.S.S. legacy archive will be published in a similar way and accessible through the VO.
@@ -188,7 +204,7 @@ After the detection of events, data processing steps are applied to generate dat
 For example, in the VHE Cherenkov astronomy domain (e.g. CTA), those data levels are labelled DL3\footnote{events being reconstructed, lower level data is specific this domain (DL0-DL2).} to DL5. In the X-ray domain, this generally correspond to L1, L2, L3.
 
 \begin{itemize}
-    \item[1] e.g. L1/DL3: an event-list is first a list of events with calibrated temporal and spatial characteristics (e.g. sky coordinates for a given epoch, time with a reference)
+    \item[1] e.g. L1/DL3: an event-list is first a list of events with calibrated temporal and spatial characteristics, e.g. sky coordinates for a given epoch, time with a reference and a proxy of energy
     \item[2] e.g. L2/DL4: the event-list can then be binned or filtered to prepare the generation of science images, spectra or light-curve, and corresponding instrument response correction are associated or calculated but not yet applied (exposure maps, sensitivity maps...)
     \item[3] e.g. L3/DL5: Calibrated maps, or spectral energy distributions for a source, or light-curves in physical units
 \end{itemize}
@@ -200,7 +216,9 @@ An additional data level corresponds to catalogs, e.g. a source catalog pointing
 
 \subsubsection{Background signal}
 
-Observations in HE may contain a high background signal, that may be due to instrument noises, or to unresolved astrophysical sources, emission from extended regions or other terrestrial sources producing particles similar to the signal. The characterization and estimation of this background may be particularly important to then apply corrections during the analysis of a source signal.
+Observations in HE may contain a high background component, that may be due to instrument noises, or to unresolved astrophysical sources, emission from extended regions or other terrestrial sources producing particles similar to the signal. The characterization and estimation of this background may be particularly important to then apply corrections during the analysis of a source signal.
+
+In the VHE domain with the IACT, WCD and neutrino techniques, the background is created by cosmic-ray induced events. The case of unresolved astrophysical sources, emission from extended regions are treated as a model of a gamma-ray or neutrino emission.
 
 
 \subsubsection{Time intervals}
@@ -211,19 +229,19 @@ For example, Stable Time Intervals (STI) are defined in Cherenkov astronomy to c
 
 \subsubsection{Instrument Response Functions}
 
-Though an event-list can contain calibrated physical values, this data still have to be corrected for the response of the instruments used. Several {Instrument Response Functions (IRFs)} thus have to be applied to enable a scientific analysis of an event-list. The IRFs are applied to convert the events that were detected into an estimation of the real flux of particles arriving at the instrument and morphology of the source.
+Though an event-list can contain calibrated physical values, this data still have to be corrected for the response of the instruments used. Several IRFs thus have to be applied to enable a scientific analysis of an event-list. The IRFs are applied to convert the events that were detected into an estimation of the real flux of particles arriving at the instrument and morphology of the source.
 
 \subsubsection{Granularity of data products}
 
-The efficient granularity for distributing HE data products seems to be the full combination of data and IRFs, although some of the IRFs may also be recomputed by a service or script after parameters selection.
-
 In order to allow for multi-wavelength data discovery of HE data products and compare observations across different regimes, it seems appropriate to distribute the metadata in the VO ecosystem together with an access link to the data file in community format for finer analysis.
+
+The efficient granularity for distributing HE data products seems to be the full combination of data and IRFs, although some of the IRFs may also be recomputed by a service or script after parameters selection, e.g. for X-ray data, so further files allowing for this reprocessing could also be considered to be part of a package.
 
 % mir already mentionned above why we should consider IRF
 %The coverage information, i.e. how the data product spans on the sky coordinates, and along time and energy axis, is an important criterium for data selection. In the case of HE observations, these parameters vary depending on the selected good time intervals.
 % to be developed
 
-The event-list dataset is generally stored as a table, with one row for a candidate detection (event) and several columns for the estimated physical parameters, e.g. time, position (on detector or in the sky), energy or pulse height, and different extra parameters across projects: errors, flags, etc.
+The event-list dataset is generally stored as a table, with one row per candidate detection (event) and several columns for the estimated physical parameters, e.g. arrival time, position (on detector or in the sky), energy or pulse height, and different extra indicators across projects: errors, flags, etc.
 
 The list of columns present in the event-list is for example described in the data format in use in the HE domain, such as OGIP or GADF as introduced below. The data formats in use generally describe the event-list data together with the IRFs and other relevant information, such as: Stable or Good Time Interval, Effective Area, Energy Dispersion, Point Spread Function, Background,...
 
@@ -234,7 +252,8 @@ The list of columns present in the event-list is for example described in the da
 
 \subsubsection{Event selection}
 
-When processing an event-list, it is important to perform an optimal {selection of the events} that are more likely to be due to the incident particles expected. This selection may depend on the source targeted or on the science objectives.
+When processing an event-list, it is important to perform an optimal {selection of the events} that are more likely to be due to the incident particles expected. This selection may depend on the source targeted or on the science objectives. The selection can be performed on the event characteristics, e.g. time, energy or more specific indicators (patterns, shape...)
+
 
 \subsubsection{Assumptions and probabilistic approach}
 
@@ -254,23 +273,29 @@ The HEASARC FITS Working Group, also known as the OGIP (Office of Guest Investig
 \subsubsection{GADF and VODF}
 \label{sec:GADF}
 
-The data formats for gamma-ray astronomy\footnote{\url{https://gamma-astro-data-formats.readthedocs.io/}} (GADF) is a community-driven initiative for the definition of a common and open high-level data format for gamma-ray instruments \citep{2021-DF}. GADF is based on the OGIP standards and is specialised for Very High Energy data.
+The data formats for gamma-ray astronomy\footnote{\url{https://gamma-astro-data-formats.readthedocs.io/}} (GADF) is a community-driven initiative for the definition of a common and open high-level data format for gamma-ray instruments \citep{2017AIPC.1792g0006D,2021-DF}. GADF is based on the OGIP standards and is specialised for Very High Energy data.
 
 The Very-high-energy Open Data Format\footnote{\url{https://vodf.readthedocs.io/}} (VODF), is an open data model and format for Very-High-Energy (VHE) gamma-ray and neutrino astronomy. Its goal is to provide a standard set of file formats and standards for data starting at the reconstructed event level as well as higher-level products such as N-dimensional binned data cubes (including sky images, light curves, and spectra) and source catalogues. With these standards, common science tools can be used to analyze data from multiple high-energy instruments. VODF aims to follow as much as possible the IVOA standards.
 
 \todo[inline]{To be completed:  Bruno}
 
 
-\subsection{Specific tools for data extraction and visualisation}
+\subsection{Tools for data extraction and visualisation}
 \label{sec:tools}
 
-X-ray data are analysed by general tools like Xspec, gammapy, and ... TBC .
-Some tools are specific to the data archive like CIAO for Chandra, for instance.
+HE data is particularly complex and diverse at lower levels. It is common to find specific tools to process the data for a given facility, e.g. CIAO for Chandra, SAS fro XMM-Newton, of Gammapy for gamma-ray data, with a particular focus on Cherenkov data as foreseen for CTA.
+
+Those tools can generally handle data from several other obsevatories, that have some level of commonalities.
+
+Several other HE software are build to handle the existing data format standards, hence enabling mutli-instrument studies, e.g. XSpec, Sherpa, or Gammapy.
+
+
 \todo[inline]{To be completed (e.g. ???)}
 
 % mireille : to be discussed
 %??? naïve question : what would be the benefit to convert science ready event table data to VOTable?
 %Would TOPcat, Aladin, etc. allow more preview steps  , xmatch, multi-wavelength analysis ?
+
 
 \section{Use Cases}
 
@@ -314,7 +339,7 @@ Datasets can then be mixed together to create a fused event-list dataset, to exp
 
 This was proposed in \citep{2019A&A...625A..10N} by a group of HE astronomers of various HE facilities.
 %This work used event-list data products as an input from different facilities (MAGIC, H.E.S.S., FACT, VERITAS, etc...).  data for the Crab Nebula computed from the Maximum likelihood functions of each event depending on the IRFs properties.
-In this work, the authors implemented a prototypical data format (GADF) for a small set of MAGIC, VERITAS, FACT, and H.E.S.S. Crab nebula observations, and they analyzed them with the open-source gammapy software package. By combining data from Fermi-LAT, and from four of the currently operating imaging atmospheric Cherenkov telescopes, they produced a joint maximum likelihood fit of the Crab nebula spectrum.
+In this work, the authors implemented a prototypical data format (GADF) for a small set of MAGIC, VERITAS, FACT, and H.E.S.S. Crab nebula observations, and they analyzed them with the open-source Gammapy software package. By combining data from Fermi-LAT, and from four of the currently operating imaging atmospheric Cherenkov telescopes, they produced a joint maximum likelihood fit of the Crab nebula spectrum.
 
 Such a work has been more recently extended with the HAWC data \citep{2022A&A...667A..36A}, and included neutrino data in a common CTA and KM3NeT source search \citep{unbehaun2023prospects}.
 
