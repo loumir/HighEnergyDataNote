@@ -54,13 +54,29 @@ infrastructure that enable VO applications.
 
 % We should introduce the purpose of the note in distribution and access of event list data products. Science cases should be focused to highlight that.
 
-High Energy (HE) astronomy typically includes X-ray astronomy, gamma-ray astronomy, neutrino astronomy, studies of cosmic rays, and more recently gravitational wave astronomy. This domain is now sufficiently developed to provide high level data such as catalogs, images, including full-sky surveys for some missions, and sources properties in the shape of spectra and time series.
+High Energy (HE) astronomy typically includes X-ray astronomy, gamma-ray astronomy, neutrino astronomy, and studies of cosmic rays. This domain is now sufficiently developed to provide high level data such as catalogs, images, including full-sky surveys for some missions, and sources properties in the shape of spectra and time series.
 Such high level, HE observations have been included in the VO, via data access endpoints provided by observatories or by agencies and indexed in the VO Registry.
 %Some high-energy (HE) data is already available via the VO. Images, time series, and spectra may be described with Obscore and access.
 
-However, after browsing this data, users may want to download lower level data and reapply data reduction steps relevant to their Science objectives. A common scenario is to download HE "event" lists, i.e. lists of detected events on a HE detector, that are expected to be detection of particles (e.g. a HE photon), and the corresponding calibration files, including instrument response functions. The findability and accessibility of these data via the VO is the focus of this note.
+However, after browsing this data, users may want to download lower level data and reapply data reduction steps relevant to their Science objectives. A common scenario is to download HE "event" lists, i.e. lists of detected events on a HE detector, that are expected to be detection of particles (e.g. a HE photon), and the corresponding calibration files, including Instrument Response Functions (IRFs). The findability and accessibility of these data via the VO is the focus of this note.
 
 We first report typical use cases for data access and analysis of data from current HE observatories. From those use cases, we note that some existing IVOA Recommendations are of interest to the domain. They should be further explored by HE observatories. We then discuss how standards could evolve to better integrate specific aspects of HE data, and if new standards should be developed.
+
+\subsection{Objectives of the document}
+
+The main objective of the document is to analyse how HE data can be better integrated to the VO.
+
+We  first identify and expose the specificities of HE data from several HE observatories. Then we intend to illustrate how HE data is or can be handled using current IVOA standards. Finally, we explore several topics that could lead to HE specific recommandations.
+
+A related objective is to provide a context and a list of topics to be further discussed within the IVOA by a dedicated HE Interest Group.
+
+
+\subsection{Scope of the document}
+
+This document mainly focuses on HE data discovery through the VO, with the identification of common use cases in the HE Astrophysics domain, which provides an insight of the specific metadata to be expose through the VO for HE data.
+
+To some extend, all current existing IVOA recommandation could be discussed in this document in the HE context.
+
 
 
 % \subsection{Role within the VO Architecture}
@@ -94,7 +110,7 @@ There are various observatories, either from ground- or space-based, that distri
 
 \subsubsection{CTAO}
 
-The Cherenkov Telescope Array Observatory (CTAO) is the next generation ground-based instrument for gamma-ray astronomy at Very-High Energies (VHE). With 64 telescopes located in the northern and southern hemispheres, the CTAO will be the first open ground-based gamma-ray observatory and the world’s largest and most sensitive instrument to study high-energy phenomena in the Universe.
+The Cherenkov Telescope Array Observatory (CTAO) is the next generation ground-based instrument for gamma-ray astronomy at Very-High Energies (VHE). With tens of telescopes located in the northern and southern hemispheres, the CTAO will be the first open ground-based gamma-ray observatory and the world’s largest and most sensitive instrument to study high-energy phenomena in the Universe.
 Building on the technology of current generation ground-based gamma-ray detectors (H.E.S.S., MAGIC and VERITAS), the CTAO will be between five and 10 times more sensitive and have unprecedented accuracy in its detection of high-energy gamma rays.
 
 CTAO will distribute data as an open observatory, for the first time in this domain, with calls for proposals and publicly released data after a proprietary period. CTAO will ensure that the data provided will be FAIR: Findable, Accessible, Interoperable and Reusable, by following the FAIR Principles for data management \citep{Wilkinson2016}. In particular, because of the complex data processing and reconstruction step, the provision of provenance metadata for CTAO data has been a driver for the development of a provenance standard in Astronomy.
@@ -106,11 +122,11 @@ A focus of CTAO is to distribute in this context their Data Level 3 (DL3) datase
 \subsubsection{H.E.S.S}
 \label{sec:hess}
 
-H.E.S.S. is a system of Imaging Atmospheric Cherenkov Telescopes located in Namibia that investigates cosmic gamma rays in the energy range from 10s of GeV to 10s of TeV. It is constituted of four telescopes officially inaugurated in 2004, and a much larger fifth telescope operational since 2012, extending the energy coverage towards lower energies and further improving sensitivity.
+H.E.S.S. is a system of Imaging Atmospheric Cherenkov Telescopes located in Namibia that investigates cosmic gamma rays in the energy range from 10s of GeV to 100s of TeV. It is constituted of four telescopes officially inaugurated in 2004, and a much larger fifth telescope operational since 2012, extending the energy coverage towards lower energies and further improving sensitivity.
 
 The H.E.S.S. collaboration operates the telescopes as a private experiment and published mainly high level data, i.e. images, time series and spectra in scientific publications after dedicated analyses.
 
-In September 2018, the H.E.S.S. Collaboration has, for the first time and unique time, released a small subset of its archival data in Flexible Image Transport System (FITS) format, an open file format widely used in astronomy. The release consists of event-lists and instrument response functions for observations of various well-known gamma-ray sources
+In September 2018, the H.E.S.S. Collaboration has, for the first time and unique time, released a small subset of its archival data in Flexible Image Transport System (FITS) format, an open file format widely used in astronomy. The release consists of Cherenkov event-lists and IRFs for observations of various well-known gamma-ray sources
 \citep{hess-zenodo.1421098}.
 
 This test data collection has been registered in the VO via a TAP service hosted at the Observatoire de Paris, with a tentative ObsCore description of each dataset. We hope that in the future, the H.E.S.S. legacy archive will be published in a similar way and accessible through the VO.
@@ -121,9 +137,14 @@ This test data collection has been registered in the VO via a TAP service hosted
 
 \subsubsection{Chandra}
 
-The Chandra X-ray Observatory, launched in 1999, is part of NASA's ﬂeet of "Great Observatories". Chandra allows scientists from around the world to obtain X-ray images of exotic environments to help understand the structure and evolution of the universe.
+Part of NASA’s fleet of "Great Observatories", the Chandra X-ray Observatory (CXO) was launched in 1999 to observe the soft X-ray universe in the 0.1 to 10 keV energy band.  Chandra is a guest observer, pointed-observation mission and obtains roughly 800 observations per year using the Advanced CCD Imaging Spectrometer (ACIS) and High Resolution Camera (HRC) instruments.  Chandra provides high angular resolution with a sub-arcsecond on-axis point spread function (PSF), a field of view up to several hundred square arcminutes, and a low instrumental background. The Chandra PSF varies with X-ray energy and significantly with off-axis angle, increasing to R50 $\sim$25 arcsec at the edge of the field of view. A pair of transmission gratings can be inserted into the X-ray beam to provide dispersed spectra with E/DeltaE $\sim$1000 for bright sources.
+The Chandra spacecraft normally dithers in a Lissajous pattern on the sky while taking data, and this motion must be removed from the time-resolved X-ray event lists when constructing X-ray images using the motion of optical guide stars tracked by the Aspect camera.
 
-\todo[inline]{To be completed: CXC; catalog, data... and VO access.}
+The Chandra X-ray Center (CXC) processes the spacecraft data through a set of Standard Data Processing Level 0 through Level 2 pipelines.  These pipelines perform numerous steps including decommutating the telemetry data, applying instrument calibrations (e.g., detector geometric, time- dependent gain, and CCD charge transfer efficiency [CTI] corrections, bad and hot pixel flagging), computing and applying the time-resolved Aspect solution to de-dither the motion of the telescope, identifying good time intervals (GTIs), and finally filtering out bad times and X-ray events with bad status.  All data products are archived in the Chandra Data Archive (CDA) in FITS format following HEASARC OGIP standards.  The CDA manages the proprietary data period (currently 6 months, after which the data become public) and provides dedicated interactive and IVOA-compliant interfaces to locate and download datasets.
+
+The CXC also provides the Chandra Source Catalog, which in the latest release (2.1) includes data for $\sim$407K unique X-ray sources on the sky and more than 2.1 million individual detections and photometric upper limits.  For each X-ray source abd detection, the catalog provides a detailed set of more than 100 tabulated positional, spatial, photometric, spectral, and temporal properties.  An extensive selection of individual observation, stacked-observation, detection region, and master source FITS data products (e.g., RMFs, ARFs, PSFs, spectra, light curves, aperture photometry MPDFs) are also provided that are directly usable for further detailed scientific analysis.
+
+Finally, the CXC distributes the CIAO data analysis package to allow users to recalibrate and analyze their data.  A key aspect of CIAO is to provide users the ability to create instrument responses (RMFs, ARFs, PSFs, instrument and exposure maps, etc.) for their observations using their choice of spectral models and weightings.  The Sherpa modeling and fitting package supports N-dimensional model fitting and optimization in Python, and supports advanced Bayesian Markov chain Monte Carlo analyses.
 
 
 \subsubsection{XMM-Newton}
@@ -135,7 +156,7 @@ The European Space Agency's (ESA) X-ray Multi-Mirror Mission (XMM-Newton) was la
 
 \subsubsection{SVOM}
 
-The SVOM mission (Space-based multi-band astronomical Variable Objects Monitor) is a Franco-Chinese mission dedicated to the study of the most distant explosions of stars, the gamma-ray bursts. It is to be launched end 2023.
+The SVOM mission (Space-based multi-band astronomical Variable Objects Monitor) is a Franco-Chinese mission dedicated to the study of the most distant explosions of stars, the gamma-ray bursts. It is to be launched in 2024.
 
 \todo[inline]{To be completed}
 
@@ -151,8 +172,6 @@ During the construction phase, the KM3NeT collaboration develops its interfaces 
 
 With multiple detectors targeting high-energy neutrinos like IceCube, ANTARES, KM3NeT, Baikal and future projects, the chance to detect a significant amount of cosmic and galactic neutrinos increases, requiring an integrated approach to link event lists with instrument responses and to correctly interpret observation time and flux expectations.
 
-
-\todo[inline]{To be completed (e.g. Jutta) - information was added by Jutta}
 
 
 %\subsection{Gravitational wave detection}
@@ -180,21 +199,26 @@ When observing during an interval of time, the data collected is a list of the d
 
 \subsubsection{Data levels}
 
-After the detection of events, data processing steps are applied to generate data products corresponding at least 3 data levels.
-For example, in the VHE Cherenkov astronomy domain (e.g. CTA), those data levels are labelled DL3\footnote{events being reconstructed, lower level data is specific this domain (DL0-DL2).} to DL5. In the X-ray domain, this would correspond to L1, L2, L3.
+After the detection of events, data processing steps are applied to generate data products. We may distinguish at least 3 main data levels. However, those data levels can vary significantly from facility to facility, and may not map directly to separate ObsCore calib\_levels.
+
+For example, in the VHE Cherenkov astronomy domain (e.g. CTA), those data levels are labelled DL3\footnote{events being reconstructed, lower level data is specific this domain (DL0-DL2).} to DL5. In the X-ray domain, this generally correspond to L1, L2, L3.
 
 \begin{itemize}
-    \item L1 (or DL3): an event-list is first a list of events with calibrated temporal and spatial characteristics (e.g. sky coordinates for a given epoch, time with a reference)
-    \item L2 (or DL4): the event-list is then binned to generate images, spectra of light-curve in counts unit, and corresponding instrument response correction (exposure maps, sensitivity maps...)
-    \item L3 (or DL5): Calibrated maps, or spectral energy distributions for a source, or light-curves in physical units
+    \item[1] e.g. L1/DL3: an event-list is first a list of events with calibrated temporal and spatial characteristics, e.g. sky coordinates for a given epoch, time with a reference and a proxy of energy
+    \item[2] e.g. L2/DL4: the event-list can then be binned or filtered to prepare the generation of science images, spectra or light-curve, and corresponding instrument response correction are associated or calculated but not yet applied (exposure maps, sensitivity maps...)
+    \item[3] e.g. L3/DL5: Calibrated maps, or spectral energy distributions for a source, or light-curves in physical units
 \end{itemize}
 
-An additional data level corresponds to catalogs, e.g. a source catalog pointing to several data products, each one corresponding to a source.
+For observations that use transmission gratings (e.g. for chandra or XMM-Newton), grating data products are created in an intermediate L1.5.
+
+An additional data level corresponds to catalogs, e.g. a source catalog pointing to several data products (e.g. collection of L3 products), each one corresponding to a source.
 
 
 \subsubsection{Background signal}
 
-Observations in HE may contain a high background signal, that may be due to instrument noises, or to unresolved astrophysical sources, emission from extended regions or other terrestrial sources producing particles similar to the signal. The characterization and estimation of this background is particularly important to then apply corrections during the analysis of a source signal.
+Observations in HE may contain a high background component, that may be due to instrument noises, or to unresolved astrophysical sources, emission from extended regions or other terrestrial sources producing particles similar to the signal. The characterization and estimation of this background may be particularly important to then apply corrections during the analysis of a source signal.
+
+In the VHE domain with the IACT, WCD and neutrino techniques, the background is created by cosmic-ray induced events. The case of unresolved astrophysical sources, emission from extended regions are treated as a model of a gamma-ray or neutrino emission.
 
 
 \subsubsection{Time intervals}
@@ -205,19 +229,19 @@ For example, Stable Time Intervals (STI) are defined in Cherenkov astronomy to c
 
 \subsubsection{Instrument Response Functions}
 
-Though an event-list can contain calibrated physical values, this data still have to be corrected for the response of the instruments used. Several {Instrument Response Functions (IRFs)} thus have to be applied to enable a scientific analysis of an event-list. The IRFs are applied to convert the events that were detected into an estimation of the real flux of particles arriving at the instrument and morphology of the source.
+Though an event-list can contain calibrated physical values, this data still have to be corrected for the response of the instruments used. Several IRFs thus have to be applied to enable a scientific analysis of an event-list. The IRFs are applied to convert the events that were detected into an estimation of the real flux of particles arriving at the instrument and morphology of the source.
 
 \subsubsection{Granularity of data products}
 
-The efficient granularity for distributing HE data products seems to be the full combination of data and IRFs, although some of the IRFs may also be recomputed by a service or script after parameters selection.
-
 In order to allow for multi-wavelength data discovery of HE data products and compare observations across different regimes, it seems appropriate to distribute the metadata in the VO ecosystem together with an access link to the data file in community format for finer analysis.
+
+The efficient granularity for distributing HE data products seems to be the full combination of data and IRFs, although some of the IRFs may also be recomputed by a service or script after parameters selection, e.g. for X-ray data, so further files allowing for this reprocessing could also be considered to be part of a package.
 
 % mir already mentionned above why we should consider IRF
 %The coverage information, i.e. how the data product spans on the sky coordinates, and along time and energy axis, is an important criterium for data selection. In the case of HE observations, these parameters vary depending on the selected good time intervals.
 % to be developed
 
-The event-list dataset is generally stored as a table, with one row for a candidate detection (event) and several columns for the estimated physical parameters, at least time, sky position, energy, and extra parameters not standardized across projects: errors, flags, etc.
+The event-list dataset is generally stored as a table, with one row per candidate detection (event) and several columns for the estimated physical parameters, e.g. arrival time, position (on detector or in the sky), energy or pulse height, and different extra indicators across projects: errors, flags, etc.
 
 The list of columns present in the event-list is for example described in the data format in use in the HE domain, such as OGIP or GADF as introduced below. The data formats in use generally describe the event-list data together with the IRFs and other relevant information, such as: Stable or Good Time Interval, Effective Area, Energy Dispersion, Point Spread Function, Background,...
 
@@ -228,7 +252,8 @@ The list of columns present in the event-list is for example described in the da
 
 \subsubsection{Event selection}
 
-When processing an event-list, it is important to perform an optimal {selection of the events} that are more likely to be due to the incident particles expected. This selection may depend on the source targeted or on the science objectives.
+When processing an event-list, it is important to perform an optimal {selection of the events} that are more likely to be due to the incident particles expected. This selection may depend on the source targeted or on the science objectives. The selection can be performed on the event characteristics, e.g. time, energy or more specific indicators (patterns, shape...)
+
 
 \subsubsection{Assumptions and probabilistic approach}
 
@@ -248,20 +273,29 @@ The HEASARC FITS Working Group, also known as the OGIP (Office of Guest Investig
 \subsubsection{GADF and VODF}
 \label{sec:GADF}
 
-The data formats for gamma-ray astronomy\footnote{\url{https://gamma-astro-data-formats.readthedocs.io/}} (GADF) is a community-driven initiative for the definition of a common and open high-level data format for gamma-ray instruments \citep{2021-DF}. GADF is based on the OGIP standards and is specialised for Very High Energy data.
+The data formats for gamma-ray astronomy\footnote{\url{https://gamma-astro-data-formats.readthedocs.io/}} (GADF) is a community-driven initiative for the definition of a common and open high-level data format for gamma-ray instruments \citep{2017AIPC.1792g0006D,2021-DF}. GADF is based on the OGIP standards and is specialised for Very High Energy data.
 
 The Very-high-energy Open Data Format\footnote{\url{https://vodf.readthedocs.io/}} (VODF), is an open data model and format for Very-High-Energy (VHE) gamma-ray and neutrino astronomy. Its goal is to provide a standard set of file formats and standards for data starting at the reconstructed event level as well as higher-level products such as N-dimensional binned data cubes (including sky images, light curves, and spectra) and source catalogues. With these standards, common science tools can be used to analyze data from multiple high-energy instruments. VODF aims to follow as much as possible the IVOA standards.
 
-\todo[inline]{To be completed}
+\todo[inline]{To be completed:  Bruno}
+
 
 \subsection{Tools for data extraction and visualisation}
-Xray data are analysed by general tools like Xspec, gammapy, and ... TBC .
-Some tools are specific to the data archive like CiaO for Chandra, for instance.
+\label{sec:tools}
+
+HE data is particularly complex and diverse at lower levels. It is common to find specific tools to process the data for a given facility, e.g. CIAO for Chandra, SAS fro XMM-Newton, of Gammapy for gamma-ray data, with a particular focus on Cherenkov data as foreseen for CTA.
+
+Those tools can generally handle data from several other obsevatories, that have some level of commonalities.
+
+Several other HE software are build to handle the existing data format standards, hence enabling mutli-instrument studies, e.g. XSpec, Sherpa, or Gammapy.
+
+
 \todo[inline]{To be completed (e.g. ???)}
 
 % mireille : to be discussed
 %??? naïve question : what would be the benefit to convert science ready event table data to VOTable?
 %Would TOPcat, Aladin, etc. allow more preview steps  , xmatch, multi-wavelength analysis ?
+
 
 \section{Use Cases}
 
@@ -269,8 +303,9 @@ Some tools are specific to the data archive like CiaO for Chandra, for instance.
 
 After the selection of a source of interest, or a group of sources, one may access different HE data products such as images, spectra and light-curves, and then want to download the corresponding event-lists and calibrations to further analyse the data.
 
-\todo[inline]{To be completed (e.g. Paula, Laurent)}
-One of the characteristics of the HE data is that, contrary to what is usually done in optics for example, their optimal use requires providing users with a view of the processing that generated the data. This implies providing ancillary data, products with different calibration levels, and possibly linking together products issued by the same processing.  (LM)
+%\todo[inline]{To be completed (e.g. Paula, Laurent)}
+One of the characteristics of the HE data is that, contrary to what is usually done in optics for example, their optimal use requires providing users with a view of the processing that generated the data. This implies providing ancillary data, products with different calibration levels, and possibly linking together products issued by the same processing.
+%(LM)
 
 
 \subsection{UC2: observation preparation}
@@ -304,7 +339,7 @@ Datasets can then be mixed together to create a fused event-list dataset, to exp
 
 This was proposed in \citep{2019A&A...625A..10N} by a group of HE astronomers of various HE facilities.
 %This work used event-list data products as an input from different facilities (MAGIC, H.E.S.S., FACT, VERITAS, etc...).  data for the Crab Nebula computed from the Maximum likelihood functions of each event depending on the IRFs properties.
-In this work, the authors implemented a prototypical data format (GADF) for a small set of MAGIC, VERITAS, FACT, and H.E.S.S. Crab nebula observations, and they analyzed them with the open-source gammapy software package. By combining data from Fermi-LAT, and from four of the currently operating imaging atmospheric Cherenkov telescopes, they produced a joint maximum likelihood fit of the Crab nebula spectrum.
+In this work, the authors implemented a prototypical data format (GADF) for a small set of MAGIC, VERITAS, FACT, and H.E.S.S. Crab nebula observations, and they analyzed them with the open-source Gammapy software package. By combining data from Fermi-LAT, and from four of the currently operating imaging atmospheric Cherenkov telescopes, they produced a joint maximum likelihood fit of the Crab nebula spectrum.
 
 Such a work has been more recently extended with the HAWC data \citep{2022A&A...667A..36A}, and included neutrino data in a common CTA and KM3NeT source search \citep{unbehaun2023prospects}.
 
@@ -370,6 +405,8 @@ The HE domain and practices could serve as use cases for the developments of dat
 \subsection{Definition of a HE event in the VO}
 \label{sec:event-bundlle-or-list}
 
+\subsubsection{Current definition in the VO}
+
 The IVOA standards incude the concept of event-list, for example in ObsCore v1.1 \citep{2017ivoa.spec.0509L}, where event is a dataproduct\_type with the following definition:
 \begin{quote}
     \textbf{event}: an event-counting (e.g. X-ray or other high energy) dataset of some sort. Typically this is instrumental data, i.e., "event data". An event dataset is often a complex object containing multiple files or other substructures. An event dataset may contain data with spatial, spectral, and time information for each measured event, although the spectral resolution (energy) is sometimes limited. Event data may be used to produce higher level data products such as images or spectra.
@@ -382,20 +419,24 @@ More recently, a new definition was proposed in the product-type vocabulary\foot
 
 Such a definition remains vague and general, and could be more specific, including a definition for a HE event, and the event-list data type.
 
-\paragraph{Discussion topics:}
+\subsubsection{Proposed definition to be discussed}
+
+A first point to be discuss would be to converge on a proper definition of HE specific data products:
 \begin{itemize}
-    \item Propose definitions for product-type:
-    \begin{itemize}
-        \item \textbf{event-list}: A collection of observed events, such as incoming high-energy particles, where an event is generally characterised by a spatial position, a time and a spectral value (e.g. an energy or a channel).
-        \item \textbf{event-bundle}: An event-bundle dataset is a complex object containing an event-list and multiple files or other substructures with contextual information, in order to correct from the instrument signature in the detection of events. Event-bundle data may be used to produce higher level data products such as images or spectra.
-    \end{itemize}
-
-    \item ObsCore erratum: change event for event-list and event-bundle
-
+    \item Propose definitions for a product-type \textbf{event-list}: A collection of observed events, such as incoming high-energy particles, where an event is generally characterised by a spatial position, a time and a spectral value (e.g. an energy, a channel, a pulse height).
+    \item Propose definitions for a product-type \textbf{event-bundle}: An event-bundle dataset is a complex object containing an event-list and multiple files or other substructures that are products necessary to analyze the event-list. Data in an event-bundle may thus be used to produce higher level data products such as images or spectra.
 \end{itemize}
+
+An ObsCore erratum could then propose to change event for event-list and event-bundle.
+
+The precise content of an event-bundle remains to be better defined, and may vary significantly from a facility to another.
+
+For example, Chandra primary products distributed via the Chandra Data Archive include around half a dozen different types of products necessary to analyze Chandra data (for example, L2 event-list, PHA spectrum, Aspect solution, bad pixel map, spacecraft ephemeris, V\&V Report). It is also possible to retrieve secondary products, containing more products that are needed to recalibrate the data with updated calibrations.
 
 
 \subsection{ObsCore metadata description of an event-list}
+\label{sec:obscore}
+
 %%%% texte by Mireille to be checked and merged : start %%
 %\include{ObscoreReviewforVOHEcontext_Mireille Louys}
 %I have some items to add in the various categories well defined by Mathieu
@@ -403,13 +444,13 @@ Such a definition remains vague and general, and could be more specific, includi
 
 %\subsubsection{Mandatory fields}
 
-\subsubsection{Usage of the mandatory terms in ivoa.Obscore}
+\subsubsection{Usage of the mandatory terms in ObsCore}
 
 ObsCore \citep{2017ivoa.spec.0509L} can provide a metadata profile for a data product of type event-list and a qualified access to the distributed file using the Access class from ObsCore (URL, format, file size).
 
 In the ObsCore representation, the event-list data product is described in terms of curation, coverage and access. However, several properties are simply set to NULL following the recommendation: Resolutions, Polarization States, Observable Axis Description, Axes lengths (set to -1)...
 
-We also note that some properties are energy dependent, such as the Spatial Coverage, Spatial Extent.
+We also note that some properties are energy dependent, such as the Spatial Coverage, Spatial Extent, PSF.
 
 \todo[inline]{TODO: show a table with all reused terms , and provide an example}
 
@@ -417,49 +458,38 @@ We also note that some properties are energy dependent, such as the Spatial Cove
     \item dataproduct\_subtype = DL3, maybe specific data format (VODF)
     \item calib\_level = between 1 and 2
     \item obs\_collection could contain many details : obs\_type (calib, science), obs\_mode (subarray
-configuration), pointing\_mode, tracking\_mode, event\_type, event\_cuts, analysis\_type…
-    \item s\_ra, s\_dec = telescope pointing coordinates
+configuration), pointing\_mode, tracking\_type, event\_type, event\_cuts, analysis\_type…
+    \item s\_ra, s\_dec = maybe telescope pointing coordinates
     \item target\_name : several targets may be in the field of view
-    \item s\_fov, s\_region, s\_resolution, em\_resolution… all those values are energy dependent, one should specifiy that the value is at a given energy, or within a range of values.
-    \item em\_min, em\_max : add fields expressed in energy (e.g. TeV)
-    \item t\_exptime : ontime, livetime, stable time intervals… maybe a T-MOC would help
+    \item s\_fov, s\_region, s\_resolution, em\_resolution... all those values are energy dependent, one should specifiy that the value is at a given energy, or within a range of values.
+    \item em\_min, em\_max : add fields expressed in energy (e.g. eV, keV or TeV)
+    \item t\_exptime : ontime, livetime, stable time intervals... maybe a T-MOC would help
     \item facility\_name, instrument\_name : minimalist, would be e.g. CTAO and a subarray.
 \end{itemize}
-
 
 
 \subsubsection{Metadata re-interpretation for the VOHE context}
 
 \paragraph{observation\_id}
-In the current definition of ObsCore DM, the data product collects data from one or several observations.
-The same happens in HE context.
+In the current definition of ObsCore, the data product collects data from one or several observations. The same happens in HE context.
 
 \paragraph{access\_ref, access\_format}
 The initial role of this metadata was to hold the access\_url allowing data access.
 Depending on the packaging of the event bundle in one compact format (OGIP, GADF, tar ball, ...)
-or as different files available independently in various urls, a datalink pointer can be
-used for accessing the various parts of IRFs, background maps, etc.
-Then in such a case the value for access\_format should be "application/x-votable+xml;content=datalink".
-The format itself of the data file is then given by the datalink parameter "content-type".
+or as different files available independently in various urls, a datalink pointer can be used for accessing the various parts of IRFs, background maps, etc.
+Then in such a case the value for access\_format should be "application/x-votable+xml;content=datalink". The format itself of the data file is then given by the datalink parameter "content-type".
 See next section \ref{sec:datalink}.
 
 \paragraph{o\_ucd}
-For the evenlist table, we can consider all measures stored in columns values have been observed .
+For the even-list table, we can consider all measures stored in columns values have been observed .
 The nature of items along time, position and energy axis are identifed in Obscore with ucd as 'time', 'pos.eq.*', 'em.*'
 and counted as t\_xel, s\_xel1, s\_xel2, em\_xel which correspond to the number of rows/events candidates observed.
 
-The signal observed is the result of event counting and would be PHA (Pulse height amplitude at detector level)
-or a number of counts for photons or particles, or a flux, etc.., depending on the data calibration level considered.
+The signal observed is the result of event counting and would be PHA (Pulse height amplitude at detector level) or a number of counts for photons or particles, or a flux, etc.., depending on the data calibration level considered.
 ObsCore uses o\_ucd to characterise the nature of the measure.
-various UCDs are used for that :
-o\_ucd=phys.count, phot.count, phot.flux, etc..
-there is currently no ucd defined for a raw measure like PulseHeightAmplitude,
-but if needed this can be requested for addition in the UCDList vocabulary .
-see VEP-UCD-15\_pulseheight.txt proposed at
-\url{'https://voparis-gitlab.obspm.fr/vespa/ivoa-standards/semantics/vep-ucd/-/blob/master/'}.
+various UCDs are used for that: o\_ucd=phys.count, phot.count, phot.flux, etc. there is currently no UCD defined for a raw measure like PulseHeightAmplitude, but if needed this can be requested for addition in the UCDList vocabulary. See VEP-UCD-15\_pulseheight.txt proposed at \url{'https://voparis-gitlab.obspm.fr/vespa/ivoa-standards/semantics/vep-ucd/-/blob/master/'}.
 
-Note that these parameters vary between the dataset of calib\_level of 1 (Raw) to the a more advanced data products (calib\_level 2 or 3), which are  filtered and rebinned from the original raw event-list.
-
+Note that these parameters vary between the dataset of calib\_level of 1 (Raw) to the a more advanced data products (calib\_level 2 or 3), which are filtered and rebinned from the original raw event-list.
 
 
 \subsubsection{Metadata addition required}
@@ -467,20 +497,14 @@ Note that these parameters vary between the dataset of calib\_level of 1 (Raw) t
 \paragraph{ev\_number}
 The event list contains a number of rows, representing detections candidates, that have no metadata keyword yet in Obscore.
 We propose 'ev\_number' to record this.
-In fact the t\_xel, s\_xel1 and s\_xel2, em\_xel elements do not apply for an event list in raw count
-as it has not been binned yet.
+In fact the t\_xel, s\_xel1 and s\_xel2, em\_xel elements do not apply for an event list in raw count as it has not been binned yet.
 
 \paragraph{Adding MIME-type to access\_format table}
-As seen in section \ref{sec:data_formats} current HE experiments and observatories
-use their community defined data format for data dissemination.
-They encapsulate the event-list table together with ancillary data dedicated
-to calibration and observing configurations and parameters.
-Even if the encapsulation is not standardized between the various projects,
-it is useful for a client application to rely on the access\_format property in
-order to send it to an appropriate visualizing tool.
+As seen in section \ref{sec:data_formats} current HE experiments and observatories use their community defined data format for data dissemination.
+They encapsulate the event-list table together with ancillary data dedicated to calibration and observing configurations and parameters.
+Even if the encapsulation is not standardized between the various projects, it is useful for a client application to rely on the access\_format property in order to send it to an appropriate visualizing tool.
 
-Therefore these can be included in the MIME-type table of ObsCore section 4.7.
-suggestion for new terms like :
+Therefore these can be included in the MIME-type table of ObsCore section 4.7. suggestion for new terms like :
 \begin{itemize}
 \item application/x-fits-ogip ...
 \item application/x-gadf  ...
@@ -489,15 +513,13 @@ suggestion for new terms like :
 \todo[inline]{to be completed with proper definition}
 
 \paragraph{energy\_min, energy\_max}
-It is not user-friendly for the user to select dataset according to an energy range
-when the spectral axis is expressed in wavelength and meters. The units and quantities are not familiar to this community.
+It is not user-friendly for the user to select dataset according to an energy range when the spectral axis is expressed in wavelength and meters. The units and quantities are not familiar to this community.
 Moreover the numerical representation of the spectral range in em\_min leads to quantities with many figures and a power as -18 not easily comparable with the current usage.
 
 \todo[inline]{cf. example HESS data shown in Aladin}
 
 
-
-\paragraph{t\_min, t\_max}
+\paragraph{t\_gti}
 
 The searching criteria in terms of time coverage require the list of stable/good time intervals to pick appropriate datasets.
 t\_min, t\_max is the global time span but t\_gti could contain the list of GTI as a T\_MOC description following the Multi-Order-Coverage (MOC) IVOA standard \citep{2022ivoa.spec.0727F}.
@@ -512,7 +534,7 @@ On the data provider's side, the T-MOC element can be computed from the Stable/G
 Each IRF file can have an Access object from ObsCore DM to describe a link to the IRF part of the data file.
 This can be reflected in an extension of ObsTAP TAP\_SCHEMA.
 
-In the TAP service we can add an IRF Table, with the following columns:
+In the TAP service we could add an IRF Table, with the following columns:
 
 \begin{itemize}
     \item event-list datapublisher\_id
@@ -531,7 +553,7 @@ In the TAP service we can add an IRF Table, with the following columns:
 \begin{figure}
 \centering
 \includegraphics[width=0.9\textwidth]{figures/EventListContext}
-\caption{event-list Context Data Model}
+\caption{event-list Context Data Model. Notes: STIs and GTIs are slightly different concepts, and multiplicities should be adapted, energy is to specific for an event (intensity?), more products may be attached to a STI/GTI or to IRF.}
 \label{fig:EventListContext}
 \end{figure}
 
@@ -549,11 +571,8 @@ In the first option, the "event-bundle" dataset (\ref{sec:event-bundlle-or-list}
 In the second option we provide links to the relevant information from the base "event-list" (\ref{sec:event-bundlle-or-list}) exposed in the discovery service. This could be done using Datalink and a list of links to each contextual information such as the IRFs. The Event-list Context Data Model (see \ref{sec:EventListContext}) would provide the concepts and vocabulary to characterise the IRFs and other information relevant to the analysis of an event-list. These specific concepts and terms describing the various flavors of IRFs and GTI will be given in the semantics and content\_qualifier FIELDS of the DataLink response to qualify the links. The different links can point to different
 dereferencable URLs or alternbatively to different fragments of the same drefereencable URL as stated by the DataLink specification.
 
-.
-
 
 \todo[inline]{To be completed: show an example ?}
-
 
 
 
