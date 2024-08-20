@@ -137,12 +137,12 @@ This test data collection has been registered in the VO via a TAP service hosted
 
 \subsubsection{Chandra}\label{sec:chandra}
 
-Part of NASA’s fleet of "Great Observatories", the Chandra X-ray Observatory (CXO) was launched in 1999 to observe the soft X-ray universe in the 0.1 to 10 keV energy band.  Chandra is a guest observer, pointed-observation mission and obtains roughly 800 observations per year using the Advanced CCD Imaging Spectrometer (ACIS) and High Resolution Camera (HRC) instruments.  Chandra provides high angular resolution with a sub-arcsecond on-axis point spread function (PSF), a field of view up to several hundred square arcminutes, and a low instrumental background. The Chandra PSF varies with X-ray energy and significantly with off-axis angle, increasing to R50 $\sim$25 arcsec at the edge of the field of view. A pair of transmission gratings can be inserted into the X-ray beam to provide dispersed spectra with E/DeltaE $\sim$1000 for bright sources.
+Part of NASA's fleet of ``Great Observatories'', the Chandra X-ray Observatory (CXO) was launched in 1999 to observe the soft X-ray universe in the 0.1 to 10 keV energy band.  Chandra is a guest observer, pointed-observation mission and obtains roughly 800 observations per year using the Advanced CCD Imaging Spectrometer (ACIS) and High Resolution Camera (HRC) instruments.  Chandra provides high angular resolution with a sub-arcsecond on-axis point spread function (PSF), a field of view up to several hundred square arcminutes, and a low instrumental background. The Chandra PSF varies with X-ray energy and significantly with off-axis angle, increasing to R50 $\sim$25 arcsec at the edge of the field of view. A pair of transmission gratings can be inserted into the X-ray beam to provide dispersed spectra with E/DeltaE $\sim$1000 for bright sources.
 The Chandra spacecraft normally dithers in a Lissajous pattern on the sky while taking data, and this motion must be removed from the time-resolved X-ray event lists when constructing X-ray images using the motion of optical guide stars tracked by the Aspect camera.
 
 The Chandra X-ray Center (CXC) processes the spacecraft data through a set of Standard Data Processing Level 0 through Level 2 pipelines.  These pipelines perform numerous steps including decommutating the telemetry data, applying instrument calibrations (e.g., detector geometric, time- dependent gain, and CCD charge transfer efficiency [CTI] corrections, bad and hot pixel flagging), computing and applying the time-resolved Aspect solution to de-dither the motion of the telescope, identifying good time intervals (GTIs), and finally filtering out bad times and X-ray events with bad status.  All data products are archived in the Chandra Data Archive (CDA) in FITS format following HEASARC OGIP standards;  see also \S~\ref{sec:ogip}.  The CDA manages the proprietary data period (currently 6 months, after which the data become public) and provides dedicated interactive and IVOA-compliant interfaces to locate and download datasets.
 
-The CXC also provides the Chandra Source Catalog, which in the latest release (2.1) includes data for $\sim$407K unique X-ray sources on the sky and more than 2.1 million individual detections and photometric upper limits.  For each X-ray source abd detection, the catalog provides a detailed set of more than 100 tabulated positional, spatial, photometric, spectral, and temporal properties.  An extensive selection of individual observation, stacked-observation, detection region, and master source FITS data products (e.g., RMFs, ARFs, PSFs, spectra, light curves, aperture photometry MPDFs) are also provided that are directly usable for further detailed scientific analysis.
+The CXC also provides the Chandra Source Catalog, which in the latest release (2.1) includes data for $\sim$407K unique X-ray sources on the sky and more than 2.1 million individual detections and photometric upper limits.  For each X-ray source and detection, the catalog provides a detailed set of more than 100 tabulated positional, spatial, photometric, spectral, and temporal properties.  An extensive selection of individual observation, stacked-observation, detection region, and master source FITS data products (e.g., RMFs, ARFs, PSFs, spectra, light curves, aperture photometry MPDFs) are also provided that are directly usable for further detailed scientific analysis.
 
 Finally, the CXC distributes the CIAO data analysis package to allow users to recalibrate and analyze their data.  A key aspect of CIAO is to provide users the ability to create instrument responses (RMFs, ARFs, PSFs, instrument and exposure maps, etc.) for their observations using their choice of spectral models and weightings.  The Sherpa modeling and fitting package supports N-dimensional model fitting and optimization in Python, and supports advanced Bayesian Markov chain Monte Carlo analyses.  
 
@@ -199,49 +199,48 @@ When observing during an interval of time, the data collected is a list of the d
 
 \subsubsection{Data levels}
 
-After the detection of events, data processing steps are applied to generate data products. We may distinguish at least 3 main data levels. However, those data levels can vary significantly from facility to facility, and may not map directly to separate ObsCore calib\_levels.
-
-For example, in the VHE Cherenkov astronomy domain (e.g. CTA), those data levels are labelled DL3\footnote{events being reconstructed, lower level data is specific this domain (DL0-DL2).} to DL5. In the X-ray domain, this generally correspond to L1, L2, L3.
+After detection of events, data processing steps are applied to generate data products. We typically distinguish at least 3 main data levels. 
 
 \begin{itemize}
-    \item[1] e.g. L1/DL3: an event-list is first a list of events with calibrated temporal and spatial characteristics, e.g. sky coordinates for a given epoch, time with a reference and a proxy of energy
-    \item[2] e.g. L2/DL4: the event-list can then be binned or filtered to prepare the generation of science images, spectra or light-curve, and corresponding instrument response correction are associated or calculated but not yet applied (exposure maps, sensitivity maps...)
-    \item[3] e.g. L3/DL5: Calibrated maps, or spectral energy distributions for a source, or light-curves in physical units
+    \item[1] An event-list with calibrated temporal and spatial characteristics, e.g. sky coordinates for a given epoch, event arrival time with time reference, and a proxy for particle energy.
+    \item[2] Binned and/or filtered event list suitable for preparation of science images, spectra or light-curves.  For some instruments, corresponding instrument responses associated with the event-list, calculated but not yet applied (e.g, exposure maps, sensitivity maps, spectral responses).
+    \item[3] Calibrated maps, or spectral energy distributions for a source, or light-curves in physical units.
+    \item[4] An additional data level may correspond to catalogs, e.g. a source catalog pointing to several data products (e.g. collection of L3 products) with each one corresponding to a source. 
 \end{itemize}
 
-For observations that use transmission gratings (e.g. for chandra or XMM-Newton), grating data products are created in an intermediate L1.5.
+However, the definitions of these data levels can vary significantly from facility to facility, and may not map directly to separate ObsCore calib\_levels.  
 
-An additional data level corresponds to catalogs, e.g. a source catalog pointing to several data products (e.g. collection of L3 products), each one corresponding to a source.
+For example, in the VHE Cherenkov astronomy domain (e.g. CTA), the data levels listed above are labelled DL3\footnote{events being reconstructed, lower level data is specific this domain (DL0--DL2).} to DL5.  However, for Chandra X-ray data, the first two levels correspond  to L1 and L2 data products (excluding the responses), while transmission-grating data products are designated L1.5 and source catalog and associated data products are all designated L3.
 
 
 \subsubsection{Background signal}
 
 Observations in HE may contain a high background component, that may be due to instrument noises, or to unresolved astrophysical sources, emission from extended regions or other terrestrial sources producing particles similar to the signal. The characterization and estimation of this background may be particularly important to then apply corrections during the analysis of a source signal.
 
-In the VHE domain with the IACT, WCD and neutrino techniques, the background is created by cosmic-ray induced events. The case of unresolved astrophysical sources, emission from extended regions are treated as a model of a gamma-ray or neutrino emission.
+In the VHE domain with the IACT, WCD and neutrino techniques, the background is created by cosmic-ray induced events. The case of unresolved astrophysical sources, emission from extended regions are treated as a model of a gamma-ray or neutrino emission.  In the X-ray domain, contributions to background can include an instrumental component, the local radiation environment (i.e. space weather) which can change dynamically, and may include the cosmological background due to unresolved astrophysical sources, depending on the spatial resolution of the instrument.
 
 
 \subsubsection{Time intervals}
 
 Depending on the stability of the instruments and observing conditions, a HE observation can be decomposed into several intervals of time that will be further analysed.
-For example, Stable Time Intervals (STI) are defined in Cherenkov astronomy to characterize the instrument response over a stable period of time. In the X-ray domain, Good Time Intervals (GTI) are computed, e.g. to reject intervals of time contaminated by solar flares. In contrast, for neutrino physics, relevant observation periods can cover up to several years due to the low statistics of the expected signal and a continuous observational coverage of the full field of view.
+For example, Stable Time Intervals (STI) are defined in Cherenkov astronomy to characterize periods of time during which the instrument response is stable. In the X-ray domain, Good Time Intervals (GTI) are computed to exclude time periods where data are missing or invalid, and may be used to reject periods impacted by high radiation, e.g. due to space weather. In contrast, for neutrino physics, relevant observation periods can cover up to several years due to the low statistics of the expected signal and a continuous observational coverage of the full field of view.
 
 
 \subsubsection{Instrument Response Functions}
 
-Though an event-list can contain calibrated physical values, this data still have to be corrected for the response of the instruments used. Several IRFs thus have to be applied to enable a scientific analysis of an event-list. The IRFs are applied to convert the events that were detected into an estimation of the real flux of particles arriving at the instrument and morphology of the source.
+Though an event-list can contain calibrated physical values, typically the data still has to be corrected for the photometric, spectral, spatial, and/or temporal responses of the instruments used to yield scientifically interpretable information. The IRFs provide mappings between the physical properties of the source and the observables, and so enable estimation of the former (such as the real flux of particles arriving at the instrument, the spectral distribution of the particle flux, and the temporal variability and morphology of the source).  Note that the small number of particles detected in many types of HE observations (i.e., Poisson regime) imply that the IRFs may not be directly invertible, so that techniques such as forward fitting are needed to estimate the physical properties of the source from the observables.  Depending on the instrument, this may imply that some IRFs cannot be easily pre-computed because they may depend on details (e.g. the shape of the source model spectrum) of the scientific analysis to be performed.
 
 \subsubsection{Granularity of data products}
 
 In order to allow for multi-wavelength data discovery of HE data products and compare observations across different regimes, it seems appropriate to distribute the metadata in the VO ecosystem together with an access link to the data file in community format for finer analysis.
 
-The efficient granularity for distributing HE data products seems to be the full combination of data and IRFs, although some of the IRFs may also be recomputed by a service or script after parameters selection, e.g. for X-ray data, so further files allowing for this reprocessing could also be considered to be part of a package.
+Where feasible, the efficient granularity for distributing HE data products seems to be the full combination of data and associated IRFs. Depending on the instrument, some IRFs may need to be (re-)computed by a service or tool after parameter selection by the user, so inclusion of additional files that are required for these steps should be included in the package where appropriate.
 
 % mir already mentionned above why we should consider IRF
 %The coverage information, i.e. how the data product spans on the sky coordinates, and along time and energy axis, is an important criterium for data selection. In the case of HE observations, these parameters vary depending on the selected good time intervals.
 % to be developed
 
-The event-list dataset is generally stored as a table, with one row per candidate detection (event) and several columns for the estimated physical parameters, e.g. arrival time, position (on detector or in the sky), energy or pulse height, and different extra indicators across projects: errors, flags, etc.
+The event-list dataset is generally stored as a table, with one row per candidate detection (event) and several columns for the observed and/or estimated physical parameters (e.g. arrival time, position (on detector or in the sky), energy or pulse height, and additional properties such as errors or flags that are project-dependent) that can vary with data level.
 
 The list of columns present in the event-list is for example described in the data format in use in the HE domain, such as OGIP or GADF as introduced below. The data formats in use generally describe the event-list data together with the IRFs and other relevant information, such as: Stable or Good Time Interval, Effective Area, Energy Dispersion, Point Spread Function, Background,...
 
@@ -269,7 +268,7 @@ NASA's HEASARC FITS Working Group was part of the Office of Guest Investigator P
 
 The purpose of these standards was to allow all mission data archived by the HEASARC to be stored in the same data format and be readable by the same software tools. \S~\ref{sec:chandra} above, for example, describes the Chandra mission products, but many other smaller projects do so as well.  Because of the OGIP standards, the same software tools can be used on all of the high-energy mission data that follow them.  There are now some thirty plus different mission datasets archived by NASA following these standards and different software tools that can analyze any of them.  
 
-Now that the IVOA is defining data models for spectra and time series, we should be careful to incude the existing OGIP standards as special cases of what re developed to be more general standards for all of astronomy.   
+Now that the IVOA is defining data models for spectra and time series, we should be careful to include the existing OGIP standards as special cases of what are developed to be more general standards for all of astronomy.   
 
 
 \subsubsection{GADF and VODF}
