@@ -411,31 +411,49 @@ The HE domain and practices could serve as use cases for the developments of dat
 
 \subsubsection{Current definition in the VO}
 
-The IVOA standards incude the concept of event-list, for example in ObsCore v1.1 \citep{2017ivoa.spec.0509L}, where event is a dataproduct\_type with the following definition:
+The IVOA standards incude the concept of event-list, for example in ObsCore v1.1 \citep{2017ivoa.spec.0509L}, where
+event is a dataproduct\_type with the following definition:
 \begin{quote}
-    \textbf{event}: an event-counting (e.g. X-ray or other high energy) dataset of some sort. Typically this is instrumental data, i.e., "event data". An event dataset is often a complex object containing multiple files or other substructures. An event dataset may contain data with spatial, spectral, and time information for each measured event, although the spectral resolution (energy) is sometimes limited. Event data may be used to produce higher level data products such as images or spectra.
+    \textbf{event}: an event-counting (e.g. X-ray or other high energy) dataset of some sort. Typically this is
+    instrumental data, i.e., "event data". An event dataset is often a complex object containing multiple files or
+    other substructures. An event dataset may contain data with spatial, spectral, and time information for each
+    measured event, although the spectral resolution (energy) is sometimes limited. Event data may be used to produce
+    higher level data products such as images or spectra.
 \end{quote}
 
 More recently, a new definition was proposed in the product-type vocabulary\footnote{\url{https://www.ivoa.net/rdf/product-type}} (draft):
 \begin{quote}
-    \textbf{event-list}: a collection of observed events, such as incoming high-energy particles. A row in an event list is typically characterised by a spatial position, a time and an energy.
+    \textbf{event-list}: a collection of observed events, such as incoming high-energy particles. A row in an event
+    list is typically characterised by a spatial position, a time and an energy.
 \end{quote}
 
-Such a definition remains vague and general, and could be more specific, including a definition for a HE event, and the event-list data type.
+Such a definition remains vague and general, and could be more specific, including a definition for a HE event, and the
+event-list data type.
 
 \subsubsection{Proposed definition to be discussed}
 
 A first point to be discuss would be to converge on a proper definition of HE specific data products:
 \begin{itemize}
-    \item Propose definitions for a product-type \textbf{event-list}: A collection of observed events, such as incoming high-energy particles, where an event is generally characterised by a spatial position, a time and a spectral value (e.g. an energy, a channel, a pulse height).
-    \item Propose definitions for a product-type \textbf{event-bundle}: An event-bundle dataset is a complex object containing an event-list and multiple files or other substructures that are products necessary to analyze the event-list. Data in an event-bundle may thus be used to produce higher level data products such as images or spectra.
+    \item Propose definitions for a product-type \textbf{event-list}: A collection of observed events, such as incoming
+    high-energy particles, where an event is generally characterised by a spatial position, a time and a spectral value
+    (e.g. an energy, a channel, a pulse height).
+    \item Propose definitions for a product-type \textbf{event-bundle}: An event-bundle dataset is a complex object
+    containing an event-list and multiple files or other substructures that are products necessary to analyze the
+    event-list. Data in an event-bundle may thus be used to produce higher level data products such as images or spectra.
 \end{itemize}
 
 An ObsCore erratum could then propose to change event for event-list and event-bundle.
 
 The precise content of an event-bundle remains to be better defined, and may vary significantly from a facility to another.
 
-For example, Chandra primary products distributed via the Chandra Data Archive include around half a dozen different types of products necessary to analyze Chandra data (for example, L2 event-list, PHA spectrum, Aspect solution, bad pixel map, spacecraft ephemeris, V\&V Report). It is also possible to retrieve secondary products, containing more products that are needed to recalibrate the data with updated calibrations.
+For example, Chandra primary products distributed via the Chandra Data Archive include around half a dozen different
+types of products necessary to analyze Chandra data (for example, L2 event-list, {\bf PHA spectrum - it is NOT an event
+list!}, Aspect solution,
+bad pixel map, spacecraft ephemeris, V\&V Report). It is also possible to retrieve secondary products,
+containing more products that are needed to recalibrate the data with updated calibrations.
+
+For VHE gamma rays and neutrinos, the DL3 event lists should mandatory be associated to their associated IRFs files. The
+links between the event-list and these IRFs should be well defined in the event-bundle.,
 
 
 \subsection{ObsCore metadata description of an event-list}
