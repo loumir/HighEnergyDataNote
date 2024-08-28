@@ -233,6 +233,16 @@ For example, Stable Time Intervals (STI) are defined in Cherenkov astronomy to c
 
 Though an event-list can contain calibrated physical values, typically the data still has to be corrected for the photometric, spectral, spatial, and/or temporal responses of the instruments used to yield scientifically interpretable information. The IRFs provide mappings between the physical properties of the source and the observables, and so enable estimation of the former (such as the real flux of particles arriving at the instrument, the spectral distribution of the particle flux, and the temporal variability and morphology of the source).  Note that the small number of particles detected in many types of HE observations (i.e., Poisson regime) imply that the IRFs may not be directly invertible, so that techniques such as forward fitting are needed to estimate the physical properties of the source from the observables.  Depending on the instrument, this may imply that some IRFs cannot be easily pre-computed because they may depend on details (e.g. the shape of the source model spectrum) of the scientific analysis to be performed.
 
+The instrumental responses typically vary with the true energy of the event, the progenitor of the event (photon vs residual cosmic ray background), as well as the position in the field of view.
+A further complication of ground-based detectors like IACTs and WCTs is that the instrumental responses also vary with:
+\begin{itemize}
+  \item The horizontal coordinates of the atmosphere, i.e. the response to a photon at low elevation is different from that at zenith due to a larger air column density, and different azimuths are affected by different magnetic field strengths and directions that modify the air-shower properties.
+  \item The atmosphere density, which can have an effect on the response that changes throughout a year, depending on the site of observation.
+  \item The brightness of the sky (for IACTs), i.e. the response is worse when the moon is up, or when there is a strong nigh-sky-background level from e.g. the Milky Way or Zodiacal light.
+\end{itemize}
+Since these are not aligned with a sky coordinate system, field-rotation during an observation must also be taken into account.
+Therefore the treatment of the temporal variation of IRFs is important, and is often taken into account in analysis by averaging over some short time period, such as the duration of the observation, or intervals within.
+
 \subsubsection{Granularity of data products}
 
 In order to allow for multi-wavelength data discovery of HE data products and compare observations across different regimes, it seems appropriate to distribute the metadata in the VO ecosystem together with an access link to the data file in community format for finer analysis.
