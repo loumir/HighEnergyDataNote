@@ -200,7 +200,7 @@ When observing during an interval of time, the data collected is a list of the d
 %Such response files depend on the way raw event lists are combined together; they are essential for the calibration steps that will help to produce calibrated event-lists in position, time and energy.
 
 
-\subsubsection{Data levels}
+\subsubsection{Data levels}\label{sec:datalevels}
 
 After detection of events, data processing steps are applied to generate data products. We typically distinguish at least 3 main data levels. 
 
@@ -277,12 +277,9 @@ Now that the IVOA is defining data models for spectra and time series, we should
 \subsubsection{GADF and VODF}
 \label{sec:GADF}
 
-The data formats for gamma-ray astronomy\footnote{\url{https://gamma-astro-data-formats.readthedocs.io/}} (GADF) is a community-driven initiative for the definition of a common and open high-level data format for gamma-ray instruments \citep{2017AIPC.1792g0006D,2021-DF}. GADF is based on the OGIP standards and is specialised for Very High Energy data.
+The data formats for gamma-ray astronomy\footnote{\url{https://gamma-astro-data-formats.readthedocs.io/}} (GADF) is a community-driven initiative for the definition of a common and open high-level data format for gamma-ray instruments \citep{2017AIPC.1792g0006D,2021-DF} starting at the reconstructed event level. GADF is based partially on the OGIP standards and is specialised for Very High Energy data. It was originally developed in 2011 for CTAO during it's prototyping phase, and was further tested on data from the HESS telescope array, where it is now used as the standard for science analysis. The project was made open-source in 2016, and became the base format for the \emph{gammapy} software.
 
-The Very-high-energy Open Data Format\footnote{\url{https://vodf.readthedocs.io/}} (VODF), is an open data model and format for Very-High-Energy (VHE) gamma-ray and neutrino astronomy. Its goal is to provide a standard set of file formats and standards for data starting at the reconstructed event level as well as higher-level products such as N-dimensional binned data cubes (including sky images, light curves, and spectra) and source catalogues. With these standards, common science tools can be used to analyze data from multiple high-energy instruments. VODF aims to follow as much as possible the IVOA standards.
-
-\todo[inline]{To be completed:  Bruno}
-
+The Very-high-energy Open Data Format\footnote{\url{https://vodf.readthedocs.io/}} (VODF), will build upon and be the successor to GADF. It is intended to address some of the short-comings of the GADF format, to provide a properly documented and consistent data model, to cover use cases of both  Very-High-Energy (VHE) gamma-ray and neutrino astronomy, and to provide more support for validation and versioning. VODF will provide a standard set of file formats for data starting at the reconstructed event level (Level 1 in \autoref{sec:datalevels}) as well as higher-level products such as N-dimensional binned data cubes (including sky images, light curves, and spectra) and source catalogues (Levels 2-4 in \autoref{sec:datalevels}. With these standards, common science tools can be used to analyze data from multiple high-energy instruments, including facilitating the ability to do combined likelihood fits of models across a wide energy range directly from events or binned products. VODF aims to follow or be compatible with existing IVOA standards as much as possible.
 
 \subsection{Tools for data extraction and visualisation}
 \label{sec:tools}
