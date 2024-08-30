@@ -389,18 +389,25 @@ Several other HE software are build to handle the existing data format standards
 
 \subsection{UC1: re-analyse event-list data for a source in a catalog}
 
-After the selection of a source of interest, or a group of sources, one may access different HE data products such as images, spectra and light-curves, and then want to download the corresponding event-lists and calibrations to further analyse the data.
+After the selection of a source of interest, or a group of sources, one may access different HE data products such as
+images, spectra and light-curves, and then want to download the corresponding event-lists and calibrations to further
+analyse the data.
 
 %\todo[inline]{To be completed (e.g. Paula, Laurent)}
-One of the characteristics of the HE data is that, contrary to what is usually done in optics for example, their optimal use requires providing users with a view of the processing that generated the data. This implies providing ancillary data, products with different calibration levels, and possibly linking together products issued by the same processing.
+One of the characteristics of the HE data is that, contrary to what is usually done in optics for example, their optimal
+use requires providing users with a view of the processing that generated the data. This implies providing ancillary data,
+products with different calibration levels, and possibly linking together products issued by the same processing.
 %(LM)
 
 
 \subsection{UC2: observation preparation}
 
-When planning for a new HE observation, one needs to search for any existing event-list data already available in the targeted sky regions, and assess if this data is sufficient to fulfill the science objectives.
+When planning for new VHE observations, one needs to search for any existing event-list data already available in the
+targeted sky regions, and assess if this data is enough to fulfill the science goals.
 
-\todo[inline]{To be completed (e.g. Bruno)}
+For this use case, one needs first to obtain the stacked exposure maps of past observations. This quantity is
+energy-dependent for VHE data can be derived from pointing position and effective areas that are position- and energy-
+dependent associated to each observation.
 
 
 \subsection{UC3: transient or variable sources}
@@ -411,25 +418,53 @@ When planning for a new HE observation, one needs to search for any existing eve
 
 \subsection{UC4: Multi-wavelength and multi-messenger science}
 
-Though there are scientific results based on HE data only, the multi-wavelength and multi-messenger approach is particularly developed in the HE domain. An astrophysical source of HE radiations is indeed generally radiating energy in several domains across the electromagnetic spectrum and may be a strong source of other particles. It is not rare to observe a HE source in radio and to look for counterparts in the infrared, optical or UV domain. Spectroscopy is also widely used to identify HE sources.
+Though there are scientific results based on HE data only, the multi-wavelength and multi-messenger approach is
+particularly developed in the HE domain. An astrophysical source of HE radiations is indeed generally radiating
+energy in several domains across the electromagnetic spectrum and may be a source of other particles, in particular
+neutrino. It is not rare to observe a HE source in radio and to look for counterparts in the infrared, optical or UV
+domain and either in X-rays or VHE/UHE band. Spectroscopy is also widely used to identify HE sources.
 
-The HE domain is thus confronted to different kinds of data types and data archives, which leads to interesting use cases for the development of the VO.
+The HE domain is thus confronted to different kinds of data types and data archives, which leads to interesting use
+cases for the development of the VO.
 
-\todo[inline]{To be completed (e.g. Bruno)}
+One use case is associated to independent analyses of the multi-wavelength and multi-messenger data. HE data are
+analyzed to produce DL5/L3 quantities from DL3/L1 stored in the VO. And the multi-wavelength and multi-messenger
+DL5/L3 data stored are retrieved into the VO and associated to realise astrophysical interpretations.
 
+The other growing use case is associated to joint statistical analyses of multi-instrument data at different levels
+(DL3/L1 and DL5/L3) by adapted open science analysis tools.
 
-\subsection{Examples of multi-wavelength analysis}
+For both use cases, any type of data should be findable on the VO and retrievable. And the data should have a
+standardized open format (OGIP, GADF, VODF).
 
-\subsubsection{Multiple Imaging Atmospheric Cherenkov Telescopes extraction example}
+Such use case is already in use with small data sets shared by VHE experiments. In
+\citep{2019A&A...625A..10N, 2022A&A...667A..36A}, groups of astronomers working on the Gammapy library had successfully
+analyzed DL3 data taken on the Crab nebula by different facilities (MAGIC, H.E.S.S., FACT, VERITAS, Fermi-LAT and HAWC).
+A real statistical joint analysis has been performed to derive an emitting model of the Crab pulsar wind nebula over more
+than five decades in energy. Such analysis type can be now retrieved in the literacy. It can be found also joint analyses
+using X-ray and VHE data \citep{giunti2022}. A proof of concept of joint analysis of VHE gamma-ray and VHE neutrino,
+using simulated data, has been also published \citep{unbehaun2024}.
 
-In order to exploit high energy data across a large interval of energy values, and from various IACTs, there is a need to harmonise metadata description.
-Datasets can then be mixed together to create a fused event-list dataset, to expand the analysis along the spectral energy axis and study the spectral behaviour of an astronomical object.
+%\todo[inline]{To be completed (e.g. Bruno)}
 
-This was proposed in \citep{2019A&A...625A..10N} by a group of HE astronomers of various HE facilities.
-%This work used event-list data products as an input from different facilities (MAGIC, H.E.S.S., FACT, VERITAS, etc...).  data for the Crab Nebula computed from the Maximum likelihood functions of each event depending on the IRFs properties.
-In this work, the authors implemented a prototypical data format (GADF) for a small set of MAGIC, VERITAS, FACT, and H.E.S.S. Crab nebula observations, and they analyzed them with the open-source Gammapy software package. By combining data from Fermi-LAT, and from four of the currently operating imaging atmospheric Cherenkov telescopes, they produced a joint maximum likelihood fit of the Crab nebula spectrum.
-
-Such a work has been more recently extended with the HAWC data \citep{2022A&A...667A..36A}, and included neutrino data in a common CTA and KM3NeT source search \citep{unbehaun2023prospects}.
+%
+%\subsection{Examples of multi-wavelength analysis}
+%
+%\subsubsection{Multiple Imaging Atmospheric Cherenkov Telescopes extraction example}
+%
+%In order to exploit high energy data across a large interval of energy values, and from various IACTs, there is a need
+%to harmonise metadata description. Datasets can then be mixed together to create a fused event-list dataset, to expand
+%the analysis along the spectral energy axis and study the spectral behaviour of an astronomical object.
+%
+%This was proposed in \citep{2019A&A...625A..10N} by a group of HE astronomers of various HE facilities.
+%%This work used event-list data products as an input from different facilities (MAGIC, H.E.S.S., FACT, VERITAS, etc...).  data for the Crab Nebula computed from the Maximum likelihood functions of each event depending on the IRFs properties.
+%In this work, the authors implemented a prototypical data format (GADF) for a small set of MAGIC, VERITAS, FACT, and
+%H.E.S.S. Crab nebula observations, and they analyzed them with the open-source Gammapy software package. By combining
+%data from Fermi-LAT, and from four of the currently operating imaging atmospheric Cherenkov telescopes, they produced a
+%joint maximum likelihood fit of the Crab nebula spectrum.
+%
+%Such a work has been more recently extended with the HAWC data \citep{2022A&A...667A..36A}, and included neutrino data
+%in a common CTA and KM3NeT source search \citep{unbehaun2024}.
 
 
 \section{IVOA standards of interest for HE}
