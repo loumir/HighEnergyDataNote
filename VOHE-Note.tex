@@ -450,8 +450,6 @@ than five decades in energy. Such analysis type can be now retrieved in the lite
 using X-ray and VHE data \citep{giunti2022}. A proof of concept of joint analysis of VHE gamma-ray and VHE neutrino,
 using simulated data, has been also published \citep{unbehaun2024}.
 
-%\todo[inline]{To be completed (e.g. Bruno)}
-
 %
 %\subsection{Examples of multi-wavelength analysis}
 %
@@ -540,7 +538,7 @@ The HE domain and practices could serve as use cases for the developments of dat
 
 \subsubsection{Current definition in the VO}
 
-The IVOA standards incude the concept of event-list, for example in ObsCore v1.1 \citep{2017ivoa.spec.0509L}, where
+The IVOA standards include the concept of event-list, for example in ObsCore v1.1 \citep{2017ivoa.spec.0509L}, where
 event is a dataproduct\_type with the following definition:
 \begin{quote}
     \textbf{event}: an event-counting (e.g. X-ray or other high energy) dataset of some sort. Typically this is
@@ -576,8 +574,7 @@ An ObsCore erratum could then propose to change event for event-list and event-b
 The precise content of an event-bundle remains to be better defined, and may vary significantly from a facility to another.
 
 For example, Chandra primary products distributed via the Chandra Data Archive include around half a dozen different
-types of products necessary to analyze Chandra data (for example, L2 event-list, {\bf PHA spectrum - it is NOT an event
-list!}, Aspect solution,
+types of products necessary to analyze Chandra data (for example, L2 event-list, Aspect solution,
 bad pixel map, spacecraft ephemeris, V\&V Report). It is also possible to retrieve secondary products,
 containing more products that are needed to recalibrate the data with updated calibrations.
 
@@ -638,7 +635,7 @@ and counted as t\_xel, s\_xel1, s\_xel2, em\_xel which correspond to the number 
 
 The signal observed is the result of event counting and would be PHA (Pulse height amplitude at detector level) or a number of counts for photons or particles, or a flux, etc.., depending on the data calibration level considered.
 ObsCore uses o\_ucd to characterise the nature of the measure.
-various UCDs are used for that: o\_ucd=phys.count, phot.count, phot.flux, etc. there is currently no UCD defined for a raw measure like PulseHeightAmplitude, but if needed this can be requested for addition in the UCDList vocabulary. See VEP-UCD-15\_pulseheight.txt proposed at \url{'https://voparis-gitlab.obspm.fr/vespa/ivoa-standards/semantics/vep-ucd/-/blob/master/'}.
+Various UCDs are used for that: o\_ucd=phys.count, phot.count, phot.flux, etc. there is currently no UCD defined for a raw measure like PulseHeightAmplitude, but if needed this can be requested for addition in the UCDList vocabulary. See VEP-UCD-15\_pulseheight.txt proposed at \url{'https://voparis-gitlab.obspm.fr/vespa/ivoa-standards/semantics/vep-ucd/-/blob/master/'}.
 
 Note that these parameters vary between the dataset of calib\_level of 1 (Raw) to the a more advanced data products (calib\_level 2 or 3), which are filtered and rebinned from the original raw event-list.
 
