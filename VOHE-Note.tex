@@ -406,19 +406,30 @@ binned products. VODF aims to follow or be compatible with existing IVOA standar
 \subsection{Tools for data extraction and visualisation}
 \label{sec:tools}
 
-HE data is particularly complex and diverse at lower levels. It is common to find specific tools to process the data for a given facility, e.g. CIAO for Chandra, SAS fro XMM-Newton, of Gammapy for gamma-ray data, with a particular focus on Cherenkov data as foreseen for CTA.
-
-Those tools can generally handle data from several other observatories, that have some level of commonalities.
-
-Several other HE software are build to handle the existing data format standards, hence enabling multi-instrument studies, e.g. XSpec, Sherpa, or Gammapy.
-
-
-\todo[inline]{To be completed (e.g. ???)}
+%HE data is particularly complex and diverse at lower levels. It is common to find specific tools to process the data for a given facility, e.g. CIAO for Chandra, SAS fro XMM-Newton, of Gammapy for gamma-ray data, with a particular focus on Cherenkov data as foreseen for CTA.
+%
+%Those tools can generally handle data from several other observatories, that have some level of commonalities.
+%
+%Several other HE software are build to handle the existing data format standards, hence enabling multi-instrument studies, e.g. XSpec, Sherpa, or Gammapy.
+%
+%
+%\todo[inline]{To be completed (e.g. ???)}
 
 % mireille : to be discussed
 %??? naïve question : what would be the benefit to convert science ready event table data to VOTable?
 %Would TOPcat, Aladin, etc. allow more preview steps  , xmatch, multi-wavelength analysis ?
 
+High energy data are typically multi-dimensional ({\em e.g.\/}, 2 spatial dimensions, time, energy, possibly polarization) and may be complex and diverse at lower levels.  Therefore one may commonly find specific tools to process the data for a given facility, {\em e.g.\/}, CIAO for Chandra, SAS for XMM-Newton, or Gammapy for gamma-ray data, with a particular focus on Cherenkov data as foreseen by CTA.
+
+However, many tools in a high energy astrophysics data analysis package may perform common tasks in a mission-independent way and can work well with similar data from other facilities.  For example, one commonly needs to be able to filter and project the multi-dimensional data to select specific data subsets with manageable sizes and eliminate extraneous data.  Some tool sets include built-in generic filtering and binning capabilities so that a general purpose region filtering and binning syntax is available to the end user.
+
+A high energy astrophysics data analysis package typically includes tools that apply or re-apply instrumental calibrations to the data, and as described above these may be observatory-specific.  More general algorithms ({\em e.g.\/}, source detection) and utility tools ({\em e.g.\/}, extract an observed spectrum from a region surrounding a source) are applied to calibrated data to extract data subsets that can then be fed into modeling tools ({\em e.g.\/}, Xspec, Sherpa, or Gammapy) together with the appropriate instrumental responses (IRFs, or RMFs and ARFs) to derive physical quantities.  Since instrumental responses are often designed to be compliant with widely adopted standards, the tools that apply these responses in many cases will interoperate with other datasets that use the same standards.  
+
+Most data analysis packages provide a visualization capability for viewing images, interacting with astronomy databases, overlaying data, or interacting via SAMP to tie several application functions together {\em (e.g.\/}, TopCat, Aladin, ds9, ESASky, Firefly) to simultaneously support both analysis and visualization of the data at hand.  In addition, many packages offer a scripting interface ({\em e.g.\/}, Python, Jupyter notebooks) that enable customized job creation to perform turn-key analysis or process bulk data in batch mode.
+
+To allow users of data to use pre-existing tools, often packages will support file I/O using several formats, for example, including FITS images and binary tables (for event files), VO formats, and several ASCII representations ({\em e.g.\/}, space, comma, or tab-separated columns).
+
+We do note that currently high energy astrophysics data and analysis systems are not created equally and there are a number of nuances with some of the data formats and analysis threads for specific instrument and projects.
 
 \section{Use Cases}
 
