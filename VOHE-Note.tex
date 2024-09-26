@@ -243,19 +243,20 @@ VHE astrophysics with the ARCA detector in the TeV range and above.
 Using Earth as a shield from atmospheric particle interference by searching for upgoing particle tracks in the detectors,
 the measurement of astrophysical neutrinos can be performed almost continuously for a wide field of view that covers the
 full visible sky. For these particle events, extensive Monte Carlo simulations are performed to evaluate the
-statistical significance towards the various theoretical assumptions for galactic or cosmic neutrino signals.
+statistical significance towards the various theoretical assumptions for galactic or cosmic neutrino signals and extensive filtering of the events dominated by the atmospheric particle background by about $1:10^{6}$ is required.
 
 During the construction phase, the KM3NeT collaboration develops its interfaces for open science and builds on the data
 gathered by its predecessor ANTARES, from which neutrino event lists have already been published on the KM3NeT VO server
-as TAP service. However, {\bf reproducibility of the searches for point-like sources -> computation of astrophysical quantities}
-require information derived from  simulations like background estimate, PSF and detector acceptance which require linking
+as TAP service. However, for full reproducibility of searches for point-like astronomical sources as well as wider scientific use of dedicated neutrino selections,
+information derived from simulations like background estimate, PSF and detector acceptance are required and should be linked
 to the actual event list and interpolation for a given observation.
 
 With multiple detectors targeting high-energy neutrinos like IceCube, ANTARES, KM3NeT, Baikal and future projects, the
 chance to detect a significant amount of cosmic and galactic neutrinos increases, requiring an integrated approach to
-link event lists with instrument responses and to correctly interpret observation time and flux expectations.
-
-% mireille : what is specific for the community in terms of data interpretation and computation steps
+link event lists with instrument responses and to correctly interpret observation time and flux expectations. As observations
+generally encompass large continously taken data sets covering a large area of the sky for multiple years, with very low statistical
+expectations for actual neutrino observation, especially correctly interpreting the observation time interval and re-weighting and limiting any probabilistic
+measures to a dedicated study must be facilitated for proper use of neutrino data.
 
 \section{Common practices in the High Energy community}
 \label{sec:vhespec}
@@ -442,6 +443,14 @@ A real statistical joint analysis has been performed to derive an emitting model
 than five decades in energy. Such analysis type can be now retrieved in the literacy. It can be found also joint analyses
 using X-ray and VHE data \citep{giunti2022}. A proof of concept of joint analysis of VHE gamma-ray and VHE neutrino,
 using simulated data, has been also published \citep{unbehaun2024}.
+
+\subsection{UC5: Extended source searches}
+
+Beyond the multimessenger approach towards a specific source type, an extension of this approach can be seen in the analysis
+of long-term and wide-angle observations for extended sky regions in the multimessenger domain. For these analyses, extensive filtering
+and statistical analyses of the datasets is required. This approach is especially dominant in low-countrate experiments like neutrinos,
+where former analyses included the mapping of neutrino emissions in the galactic plane to gamma-ray emissions \citep{doi:10.1126/science.adc9818}
+or search for neutrino emission from the fermi bubbles with ANTARES data \citep{ANTARES2014}.
 
 %\todo[inline]{To be completed (e.g. Bruno)}
 
