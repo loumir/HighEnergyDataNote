@@ -77,15 +77,15 @@ The main objective of the document is to analyse how HE data can be better integ
 
 We  first identify and expose the specificities of HE data from several HE observatories. Then we intend to illustrate how HE data is or can be handled using current IVOA standards. Finally, we explore several topics that could lead to HE specific recommandations.
 
-A related objective is to provide a context and a list of topics to be further discussed within the IVOA by a dedicated HE Interest Group.
+A related objective is to provide a context and a list of topics to be further discussed within the IVOA by a dedicated HE Interest Group (HEIG).
 
 
 \subsection{Scope of the document}
 
 This document mainly focuses on HE data discovery through the VO, with the identification of common use cases in the HE astrophysics domain, which provides an insight of the specific metadata to be expose through the VO for HE data.
 
-Some current existing IVOA recommendations is discussed in this document within the HE context and they will be in-depth
-studied in the High Energy Interest Group (HEIG).
+Some current existing IVOA recommendations are discussed in this document within the HE context and they will be in-depth
+studied in the  HEIG.
 
 
 
@@ -268,7 +268,7 @@ measures to a dedicated study must be facilitated for proper use of neutrino dat
 \section{Common practices in the High Energy community}
 \label{sec:vhespec}
 
-\subsection{Data flow specificities}
+\subsection{Data specificities}
 
 \subsubsection{Event-counting}
 
@@ -291,12 +291,10 @@ After detection of events, data processing steps are applied to generate data pr
     \item[1] An event-list with calibrated temporal and spatial characteristics, e.g. sky coordinates for a given epoch, event arrival time with time reference, and a proxy for particle energy.
     \item[2] Binned and/or filtered event list suitable for preparation of science images, spectra or light-curves.  For some instruments, corresponding instrument responses associated with the event-list, calculated but not yet applied (e.g, exposure maps, sensitivity maps, spectral responses).
     \item[3] Calibrated maps, or spectral energy distributions for a source, or light-curves in physical units, or adjusted source models.
-    \item[4] An additional data level may correspond to catalogs, e.g. a source catalog pointing to several data products (e.g. collection of L3/DL5 products) with each one corresponding to a source, catalog of source models generated with an uniform analyse.
+    \item[4] An additional data level may correspond to catalogs, e.g. a source catalog pointing to several data products (e.g. collection of high level products) with each one corresponding to a source, catalog of source models generated with an uniform analyse.
 \end{itemize}
 
-However, the definitions of these data levels can vary significantly from facility to facility, and may not map directly to separate ObsCore calib\_levels.
-
-For example, in the VHE Cherenkov astronomy domain (e.g. CTA), the data levels listed above are labelled DL3\footnote{lower
+However, the definitions of these data levels can vary significantly from facility to facility. For example, in the VHE Cherenkov astronomy domain (e.g. CTA), the data levels listed above are labelled DL3\footnote{lower
 level data (DL0--DL2), that are specific to the used instrumentation (IACT, WCD), are reconstructed and filtered, which
 constitute the events lists called DL3.} to DL5.  However, for Chandra X-ray data, the first two levels correspond  to L1 and L2 data products (excluding the responses), while transmission-grating data products are designated L1.5 and source catalog and associated data products are all designated L3.
 
@@ -305,22 +303,27 @@ constitute the events lists called DL3.} to DL5.  However, for Chandra X-ray dat
 
 Observations in HE may contain a high background component, that may be due to instrument noises, or to unresolved astrophysical sources, emission from extended regions or other terrestrial sources producing particles similar to the signal. The characterization and estimation of this background may be particularly important to then apply corrections during the analysis of a source signal.
 
-In the VHE domain with the IACT, WCD and neutrino techniques, the main source of background at the DL3 level is created by cosmic-ray induced events. The case of unresolved astrophysical sources, emission from extended regions are treated as models of gamma-ray or neutrino emission.  In the X-ray domain, contributions to background can include an instrumental component, the local radiation environment (i.e. space weather) which can change dynamically, and may include the cosmological background due to unresolved astrophysical sources, depending on the spatial resolution of the instrument.
+In the VHE domain with the IACT, WCD and neutrino techniques, the main source of background at the DL3 level is created by cosmic-ray induced events. The case of unresolved astrophysical sources, emission from extended regions are treated as models of gamma-ray or neutrino emission.
+
+In the X-ray domain, contributions to background can include an instrumental component, the local radiation environment (i.e. space weather) which can change dynamically, and may include the cosmological background due to unresolved astrophysical sources, depending on the spatial resolution of the instrument.
 
 
 \subsubsection{Time intervals}
 
 Depending on the stability of the instruments and observing conditions, a HE observation can be decomposed into several intervals of time that will be further analysed.
+
 For example, Stable Time Intervals (STI) are defined in Cherenkov astronomy to characterize periods of time during which the instrument response is stable. In the X-ray domain, Good Time Intervals (GTI) are computed to exclude time periods where data are missing or invalid, and may be used to reject periods impacted by high radiation, e.g. due to space weather. In contrast, for neutrino physics, relevant observation periods can cover up to several years due to the low statistics of the expected signal and a continuous observational coverage of the full field of view.
 
 
 \subsubsection{Instrument Response Functions}
 
-Though an event-list can contain calibrated physical values, typically the data still has to be corrected for the
+Though an event-list can contain calibrated physical values, the data typically still has to be corrected for the
 photometric, spectral, spatial, and/or temporal responses of the instruments used to yield scientifically interpretable
 information. The IRFs provide mappings between the physical properties of the source and the observables, and so enable
 estimation of the former (such as the real flux of particles arriving at the instrument, the spectral distribution of
-the particle flux, and the temporal variability and morphology of the source). Note that the small number of particles
+the particle flux, and the temporal variability and morphology of the source).
+
+Note that the small number of particles
 detected in many types of HE observations (i.e. within a Poisson regime) and the fact that the IRFs may not be directly invertible,
 techniques such as forward-folding fitting \citep{mattox:1996} are needed to estimate the physical properties of the
 source from the observables.
@@ -337,11 +340,6 @@ Therefore the treatment of the temporal variation of IRFs is important, and is o
 
 \subsubsection{Granularity of data products}
 
-In order to allow for multi-wavelength data discovery of HE data products and compare observations across different regimes,
-it seems appropriate to distribute the metadata in the VO ecosystem together with an access link to the data file in
-community format for finer analysis. Where feasible, the efficient granularity for distributing HE data products seems
-to be the full combination of data and associated IRFs.
-
 The event-list dataset is generally stored as a table, with one row per candidate detection (event) and several columns
 for the observed and/or estimated physical parameters (e.g. arrival time, position on detector or in the sky, energy or
 pulse height, and additional properties such as errors or flags that are project-dependent).
@@ -350,6 +348,11 @@ The list of columns present in the event-list is for example described in the da
 such as OGIP or GADF as introduced below. The data formats in use generally describe the event-list data together
 with the IRFs (Effective Area, Energy Dispersion, Point Spread Function, Background) and other relevant information, such
 as: Stable or Good Time Interval, dead time, ...
+
+In order to allow for multi-wavelength data discovery of HE data products and compare observations across different regimes,
+it seems appropriate to distribute the metadata in the VO ecosystem together with an access link to the data file in
+community format for finer analysis. Where feasible, the efficient granularity for distributing HE data products seems
+to be the full combination of data and associated IRFs.
 
 \subsection{Work flow specificities}
 
@@ -423,7 +426,7 @@ High energy data are typically multi-dimensional ({\em e.g.\/}, 2 spatial dimens
 
 However, many tools in a high energy astrophysics data analysis package may perform common tasks in a mission-independent way and can work well with similar data from other facilities.  For example, one commonly needs to be able to filter and project the multi-dimensional data to select specific data subsets with manageable sizes and eliminate extraneous data.  Some tool sets include built-in generic filtering and binning capabilities so that a general purpose region filtering and binning syntax is available to the end user.
 
-A high energy astrophysics data analysis package typically includes tools that apply or re-apply instrumental calibrations to the data, and as described above these may be observatory-specific.  More general algorithms ({\em e.g.\/}, source detection) and utility tools ({\em e.g.\/}, extract an observed spectrum from a region surrounding a source) are applied to calibrated data to extract data subsets that can then be fed into modeling tools ({\em e.g.\/}, Xspec, Sherpa, or Gammapy) together with the appropriate instrumental responses (IRFs, or RMFs and ARFs) to derive physical quantities.  Since instrumental responses are often designed to be compliant with widely adopted standards, the tools that apply these responses in many cases will interoperate with other datasets that use the same standards.  
+A high energy astrophysics data analysis package typically includes tools that apply or re-apply instrumental calibrations to the data, and as described above these may be observatory-specific.  More general algorithms ({\em e.g.\/}, source detection) and utility tools ({\em e.g.\/}, extract an observed spectrum from a region surrounding a source) are applied to calibrated data to extract data subsets that can then be fed into modeling tools ({\em e.g.\/}, Xspec, Sherpa, or Gammapy) together with the appropriate instrumental responses (IRFs, or RMFs and ARFs) to derive physical quantities.  Since instrumental responses are often designed to be compliant with widely adopted standards, the tools that apply these responses in many cases will interoperate with other datasets that use the same standards.
 
 Most data analysis packages provide a visualization capability for viewing images, interacting with astronomy databases, overlaying data, or interacting via SAMP to tie several application functions together {\em (e.g.\/}, TopCat, Aladin, ds9, ESASky, Firefly) to simultaneously support both analysis and visualization of the data at hand.  In addition, many packages offer a scripting interface ({\em e.g.\/}, Python, Jupyter notebooks) that enable customized job creation to perform turn-key analysis or process bulk data in batch mode.
 
@@ -573,12 +576,10 @@ Provenance information of VHE data product is a crucial information to provide, 
 The develoment of the IVOA Provenance Data Model \citep{2020ivoa.spec.0411S} has been conducted with those use cases in mind. The Provenance Data Model proposes to structure this information as activities and entities (as in the W3C PROV recommendation), and adds the concepts of descriptions and configuration of each step, so that the complexity of provenance of VHE data can be exposed.
 
 
-\todo[inline]{To be completed (e.g. Mathieu)}
-
-
 \subsection{Data Models in working drafts}
 
 The HE domain and practices could serve as use cases for the developments of data models, such as Dataset DM, Cube DM or MANGO DM.
+
 
 
 \section{Topics for discussions in an Interest Group}
@@ -626,11 +627,13 @@ The precise content of an event-bundle remains to be better defined, and may var
 
 For example, Chandra primary products distributed via the Chandra Data Archive include around half a dozen different
 types of products necessary to analyze Chandra data (for example, L2 event-list, Aspect solution,
-bad pixel map, spacecraft ephemeris, V\&V Report). {\bf the following is not clear for BKH: It is also possible to retrieve secondary products,
+bad pixel map, spacecraft ephemeris, V\&V Report).
+
+{\bf the following is not clear for BKH: It is also possible to retrieve secondary products,
 containing more products that are needed to recalibrate the data with updated calibrations}.
 
 For VHE gamma rays and neutrinos, the DL3 event lists should mandatory be associated to their associated IRFs files. The
-links between the event-list and these IRFs should be well defined in the event-bundle.,
+links between the event-list and these IRFs should be well defined in the event-bundle.
 
 
 \subsection{ObsCore metadata description of an event-list}
