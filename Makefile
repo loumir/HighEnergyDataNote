@@ -4,10 +4,10 @@
 DOCNAME = VOHE-Note
 
 # count up; you probably do not want to bother with versions <1.0
-DOCVERSION = 0.5
+DOCVERSION = 0.6
 
 # Publication date, ISO format; update manually for "releases"
-DOCDATE = 2024-08-30
+DOCDATE = 2024-09-27
 
 # What is it you're writing: NOTE, WD, PR, REC, PEN, or EN
 DOCTYPE = NOTE
