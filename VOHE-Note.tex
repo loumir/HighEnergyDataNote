@@ -561,12 +561,15 @@ that make easier the study of transient phenomena.
 
 \subsubsection{MIVOT}
 
-Model Instances in VOTables (MIVOT) defines a syntax to map VOTable data to any model serialized in VO-DML. The annotation operates as a bridge between the data and the model. It associates the column/param metadata from the VOTable to the data model elements (class, attributes, types, etc.) [...]. The data model elements are grouped in an independent annotation block complying with the MIVOT XML syntax. This annotation block is added as an extra resource element at the top of the VOTable result resource. The MIVOT syntax allows to describe a data structure as a hierarchy of classes. It is also able to represent relations and composition between them. It can also build up data model objects by aggregating instances from different tables of the VOTable.
-In the case of HE data, this annotation pattern, used together with the MANGO model, will help to make machine-readable quantities that are currently not considered in the VO, such as the hardness ratio, the energy bands, the flags associated with measurements or  extended sources.
-% (LM)
-
-\todo[inline]{To be completed}
-
+Model Instances in VOTables (MIVOT _cite{2023ivoa.spec.0620M}) defines a syntax to map VOTable data to any model serialized in VO-DML.
+The annotation operates as a bridge between the data and the model.
+It associates the column/param metadata from the VOTable to the data model elements (class, attributes, types, etc.) [...].
+The data model elements are grouped in an independent annotation block complying with the MIVOT XML syntax. 
+his annotation block is added as an extra resource element at the top of the VOTable result resource.
+The MIVOT syntax allows to describe a data structure as a hierarchy of classes.
+It is also able to represent relations and composition between them. It can also build up data model objects by aggregating instances from different tables of the VOTable.
+In the case of HE data, this annotation pattern, used together with the MANGO model, will help to make machine-readable quantities that are currently not considered in the VO,
+such as the hardness ratio, the energy bands, the flags associated with measurements or  extended sources.
 
 
 \subsubsection{Provenance}
