@@ -13,4 +13,4 @@
 *.pdf
 *.toc
 ivoatexmeta.tex
-
+.project
