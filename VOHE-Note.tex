@@ -224,11 +224,34 @@ and supports advanced Bayesian Markov chain Monte Carlo analyses.
 
 \subsubsection{XMM-Newton}
 
-The European Space Agency's (ESA) X-ray Multi-Mirror Mission (XMM-Newton) was launched in 1999. XMM-Newton is ESA's
-second cornerstone of the Horizon 2000 Science Program. It carries 3 high throughput X-ray telescopes with an
-unprecedented effective area, and an optical monitor, dedicated to the study of celestial X-ray sources.
+The European Space Agency's (ESA) X-ray Multi-Mirror Mission (XMM-Newton) \footnote{https://www.cosmos.esa.int/web/xmm-newton}
+was launched by an Ariane 504 on December 10th 1999. XMM-Newton is ESA's second cornerstone of the Horizon 2000 Science Programme.
+It carries 3 high throughput X-ray telescopes with an unprecedented effective area, 2 reflexion grating spectrometers and an optical monitor. 
+The large collecting area and ability to make long uninterrupted exposures provide highly sensitive observations.
+The XMM-Newton mission is helping scientists to solve a number of cosmic mysteries, ranging from the enigmatic black holes
+to the origins of the Universe itself. Observing time on XMM-Newton is being made available to the scientific community,
+applying for observational periods on a competitive basis.
 
-\todo[inline]{To be completed: XMM catalogs, data... and VO access.}
+One of the mission's ground segment modules, the SSC /footnote{http://xmmssc.irap.omp.eu/}, is in charge of maximizing the scientific return of
+this space observatory by exhaustively analyzing
+the content of the instruments' fields of view. During the development phase (1996-1999), the SSC,
+in collaboration with the SOC (ESAC), designed and produced the scientific analysis software (SAS).
+Since then, it has contributed to its maintenance and development. This software is publicly available.
+
+The general pipeline is operated as ESAC (Villafranca, Spain) since 2012, except for the part concerning cross-correlation
+with astronomical archives which runs in Strasbourg.
+The information thus produced is intended for the guest observer and, after a proprietary period of one year,
+for the international community. 
+In parallel, the SSC regularly compiles an exhaustive catalog of all X-ray sources detected by EPIC cameras.
+The SSC validates these catalogs, enriches them with multi-wavelength data and exploits them in several scientific programs.  
+
+The XMM catalog is published through various WEB applications: XSA \footnote{https://www.cosmos.esa.int/web/xmm-newton/xsa},
+XCatDB \footnote{https://xcatdb.unistra.fr/4xmm}, IRAP \footnote{http://xmm-catalog.irap.omp.eu/} and
+HEASARCH \footnote{http://heasarc.gsfc.nasa.gov/db-perl/W3Browse/w3browse.pl}.
+It is also published in the VO, mainly as TAP services. 
+It is to be noted that the TAP service operated in Strasbourg (\url{https://xcatdb.unistra.fr/xtapdb} - to be deployed in 10/2024) returns responses where data is mapped on the MANGO model with MIVOT. 
+
+\todo[inline]{To be validated by ADA.}
 
 
 \subsubsection{SVOM}
