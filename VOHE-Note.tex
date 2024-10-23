@@ -675,6 +675,11 @@ Provenance information of VHE data product is crucial information to provide, es
 
 The develoment of the IVOA Provenance Data Model \citep{2020ivoa.spec.0411S} has been conducted with those use cases in mind. The Provenance Data Model proposes to structure this information as activities and entities (as in the W3C PROV recommendation), and adds the concepts of descriptions and configuration of each step, so that the complexity of provenance of VHE data can be exposed.
 
+\subsubsection{VOEvent}
+
+Source variability and observations of transient are common in the HE domain, and as such, handling of alerts is generally including in the requirements of HE observatories. Alerts are both sent and received by HE observatories. The IVOA recommendation VOEvent \citep{2017ivoa.spec.0320S} is thus of interest to the HE domain.
+
+
 \subsubsection{Measurements}
 
 The Measurements model \citep{2022ivoa.spec.1004R} describes measured or determined astronomical data and their associated errors.
@@ -683,6 +688,15 @@ This model is highly compatible with the primary measured properties of High Ene
 However, since HE data is typically very sparse, derived properties are often expressed as probability distributions, which are not
 well represented by the IVOA models.  This is one area where input from the HE community can help to improve the IVOA models to better
 represent HE data.
+
+
+\subsubsection{Photometry}
+
+Flux density measurements are commonly performed in the HE domain, e.g. from images with various photometry techniques. The Photometry Data Model (PhotDM, \citealt{2022ivoa.spec.1101S}) could be of interest to obtains such measurements in HE as well as at other wavelength, in order to compute Spectral Energy Distribution for a given source. PhotDM is particularly developed with an attention to optical photometry, but may be adapted to HE needs.
+
+\subsubsection{Object visibility and scheduled observations}
+
+HE observatories have similar needs on the topic of observation preparation and scheduling. As suchs, standards like ObsLocTAP \citep{2021ivoa.spec.0724S} and ObjVisSAP\footnote{\url{https://www.ivoa.net/documents/ObjVisSAP/}} are relevant and may be of interest in the HE domain.
 
 
 \subsection{Data Models in working drafts}
