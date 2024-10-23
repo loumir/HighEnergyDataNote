@@ -34,7 +34,7 @@ Mathieu Servillat and the HE group
 % Matthias Fuessling
 % Régis Terrier
 
-% Note contributors
+% Note contributors on github (including issues)
 % Mathieu Servillat
 % François Bonnarel
 % Bruno Khélifi
@@ -64,7 +64,7 @@ Mathieu Servillat and the HE group
 \begin{document}
 
 \begin{abstract}
-Virtual Observatory and High Energy Astrophysics
+This note explores the connections between the Virtual Observatory (VO) and High Energy (HE) astrophysics. Observations of the Universe at high energies are based on techniques that are radically different compared to the optical, or radio domain. We describe the operations and purpose of several HE observatories, then detail the specificities of the HE data and its processing, and derive typical HE use cases relevant for the VO. A HE group has been federated over the years and this note reports on several topics that could constitute an initial roadmap to a HE interest group within the IVOA.
 \end{abstract}
 
 
@@ -183,8 +183,7 @@ an open file format widely used in astronomy. The release consists of Cherenkov 
 various well-known gamma-ray sources \citep{hess-zenodo.1421098}.
 
 This test data collection has been registered in the VO via a TAP service hosted at the Observatoire de Paris, with a
-tentative ObsCore description of each dataset. We hope that, in the future, the H.E.S.S. legacy archive will be published
-in a similar way and accessible through the VO.
+tentative ObsCore description of each dataset (see section \ref{sec:vorecs_obscore}). In the future, the H.E.S.S. legacy archive will possibly be published in a similar way and accessible through the VO.
 
 \subsubsection{CTAO}
 \label{sec:ctao}
@@ -423,7 +422,7 @@ such as OGIP or GADF as introduced further below (\ref{sec:data_formats}). The d
 with the IRFs (Effective Area, Energy Dispersion, Point Spread Function, Background) and other relevant information, such
 as: Stable and/or Good Time Interval, dead time, ...
 
-Such time interval are use to define the granularity of the data products, e.g. it may be practical to list all events that will be analysed with the same IRFs. In H.E.S.S., such event-list correspond to a run of 30min of data acquisition.
+Such time intervals may be used to define the granularity of the data products, e.g. it may be practical to list all events that will be analysed with the same IRFs over a given stable time interval. In H.E.S.S., such event-list correspond to a run of 30min of data acquisition.
 
 Where feasible, the efficient granularity for distributing HE data products seems to be the full combination of data (event-list) and associated IRFs, packed or linked together, with further calibration files, so that the package becomes self-described.
 
@@ -524,13 +523,17 @@ To allow users of data to use pre-existing tools, often packages will support fi
 
 We do note that currently high energy astrophysics data and analysis systems are not created equally and there are a number of nuances with some of the data formats and analysis threads for specific instrument and projects.
 
+
 \section{Use Cases}
+
+Given the specificities of the HE observatories (see section \ref{}) and the HE data (see section \ref{}), we list in this section some use cases that are typical to the search and handling of HE data.
 
 \subsection{UC1: re-analyse event-list data for a source in a catalog}
 
-After the selection of a source of interest, or a group of sources, one may access different HE data products such as
-images, spectra and light-curves, and then want to download the corresponding event-lists and calibrations to further
-analyse the data.
+After the selection of a source of interest, or a group of sources, one may access different high level HE data products such as
+images, spectra and light-curves. To further study the HE data, users genrally download the corresponding event-lists and calibration files to performe a new analyse of the data, with their specific science case in mind.
+
+Users will thus access those event-list and retrieve or regenerate the related calibration files. They will also install and run dedicated tools to reprocess this low-level data.
 
 %\todo[inline]{To be completed (e.g. Paula, Laurent)}
 One of the characteristics of the HE data is that, contrary to what is usually done in optics for example, their optimal
@@ -541,7 +544,7 @@ products with different calibration levels, and possibly linking together produc
 
 \subsection{UC2: observation preparation}
 
-When planning for new VHE observations, one needs to search for any existing event-list data already available in the
+When planning for new HE/VHE observations, one needs to search for any existing event-list data already available in the
 targeted sky regions, and assess if this data is enough to fulfill the science goals.
 
 For this use case, one needs first to obtain the stacked exposure maps of past observations. This quantity is
@@ -619,6 +622,7 @@ or search for neutrino emission from the fermi bubbles with ANTARES data \citep{
 \label{sec:vorecs}
 
 \subsubsection{ObsCore and TAP}
+\label{sec:vorecs_obscore}
 
 Event-list datasets can be described in ObsCore using a dataproduct\_type set to "event", and distributed via a TAP service. However, this is not widely used in current services, and we observe only a few services with event-list datasets declared in the VO Registry, and mainly the H.E.S.S. public data release (see \ref{sec:hess}).
 
@@ -699,6 +703,7 @@ represent Event list data and provides the framework for specialising to represe
 as slices of a multi-dimensional cube.  The image modeling provides the structure necessary to represent important HE image products.
 
 \subsubsection{MANGO}
+
 MANGO is a model (draft: \footnote{https://github.com/ivoa-std/MANGO}) that has been developed to reveal
 and describe complex quantities that are usually distributed in query response tables.
 The use cases on which MANGO is built were collected in 2019 from different scientific fields, including HE.
@@ -767,7 +772,7 @@ For VHE gamma rays and neutrinos, the DL3 event lists should mandatory be associ
 links between the event-list and these IRFs should be well defined in the event-bundle.
 
 
-\subsection{ObsCore metadata description of an event-list}
+\subsection{ObsCore description of an event-list}
 \label{sec:obscore_he}
 
 %%%% texte by Mireille to be checked and merged : start %%
@@ -777,15 +782,17 @@ links between the event-list and these IRFs should be well defined in the event-
 
 %\subsubsection{Mandatory fields}
 
+ObsCore \citep{2017ivoa.spec.0509L} can provide a metadata profile for a data product of type event-list (event) and a qualified access to the distributed file using the Access class from ObsCore (URL, format, file size).
+
 \subsubsection{Usage of the mandatory terms in ObsCore}
 
-ObsCore \citep{2017ivoa.spec.0509L} can provide a metadata profile for a data product of type event-list and a qualified access to the distributed file using the Access class from ObsCore (URL, format, file size).
-
-In the ObsCore representation, the event-list data product is described in terms of curation, coverage and access. However, several properties are simply set to NULL following the recommendation: Resolutions, Polarisation States, Observable Axis Description, Axes lengths (set to -1)...
+In the ObsCore representation, the event-list data product is described in terms of curation, coverage and access. However, several properties are simply set to NULL following the recommendation: Resolutions, Polarisation States, Observable Axis Description, Axes lengths (set to -1).
 
 We also note that some properties are energy dependent, such as the Spatial Coverage, Spatial Extent, PSF.
 
-\todo[inline]{TODO: show a table with all reused terms , and provide an example}
+%\todo[inline]{TODO: show a table with all reused terms , and provide an example}
+
+Mandatory terms in ObsCore may be for example:
 
 \begin{itemize}
     \item dataproduct\_subtype = DL3, maybe specific data format (VODF)
@@ -825,7 +832,7 @@ Various UCDs are used for that: o\_ucd=phys.count, phot.count, phot.flux, etc. t
 Note that these parameters vary between the dataset of calib\_level of 1 (Raw) to the a more advanced data products (calib\_level 2 or 3), which are filtered and rebinned from the original raw event-list.
 
 
-\subsubsection{Metadata addition required}
+\subsubsection{Proposed additions}
 
 \paragraph{ev\_number}
 The event list contains a number of rows, representing detections candidates, that have no metadata keyword yet in Obscore.
@@ -908,7 +915,7 @@ In the second option, we would provide links to the relevant information from th
 dereferencable URLs or alternbatively to different fragments of the same drefereencable URL as stated by the DataLink specification.
 
 
-\todo[inline]{To be completed: show an example ?}
+%\todo[inline]{To be completed: show an example ?}
 
 
 
